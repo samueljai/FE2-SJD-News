@@ -1,0 +1,40 @@
+.App * {
+  border: 1px solid red
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 15% auto;
+  grid-template-areas: 'leftPanel mainDisplay';
+}
+
+.leftPanel {
+  grid-area: leftPanel;
+  display: grid;
+  grid-template-rows: 15% auto;
+  grid-template-areas: 'logo' 'navPanel';
+}
+
+.logo {
+  grid-area: logo;
+}
+
+.navPanel {
+  grid-area: navPanel;
+}
+
+.mainDisplay {
+  grid-area: mainDisplay;
+  height: 100%;
+  width: 100%;
+}
+
+.mainHeader {
+  height: 10%;
+}
+
+main {
+  height: 90%;
+}
