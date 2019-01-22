@@ -25,6 +25,7 @@ class App extends Component {
         <Router className="mainDisplay">
           <Homepage path="/" toggleSidebar={this.toggleSidebar} />
           <Topics path="/topics" toggleSidebar={this.toggleSidebar} />
+          <Articles path="/topics/:slug/articles" toggleSidebar={this.toggleSidebar} />
           <Articles path="/articles" toggleSidebar={this.toggleSidebar} />
           <Users path="/users" toggleSidebar={this.toggleSidebar} />
         </Router>

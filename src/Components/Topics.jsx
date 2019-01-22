@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/Topics.css'
 import ListTopics from './ListTopics';
+import * as api from '../Utils/api'
+
 
 class Topics extends Component {
 
   state = {
     loading: true,
-    topics: [
-      { description: 'Code is love, code is life', slug: 'coding' },
-      { description: 'FOOTIE!', slug: 'football' },
-      { description: 'Hey good looking, what you got cooking?', slug: 'cooking' },
-    ]
+    topics: []
   }
 
   render() {
@@ -35,17 +33,10 @@ class Topics extends Component {
     this.fetchTopics();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.topic !== this.props.topic) {
-      this.fetchTopics();
-    }
-  }
-
   fetchTopics = () => {
-    // api.getTopics()
-    //   .then(topics => this.setState({ topics, loading: false }))
-    //   .catch(err => console.log(err))
-    this.setState({ loading: false })
+    api.getTopics()
+      .then(topics => this.setState({ topics, loading: false }))
+      .catch(err => console.log(err))
   }
 }
 

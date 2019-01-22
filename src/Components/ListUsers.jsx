@@ -5,7 +5,7 @@ const ListUsers = ({ users }) => {
   return (
     <React.Fragment>
       {users.map(user => (
-        <div className="card" onClick={() => handleClick(user.username)}>
+        <div className="card" key={user.username} onClick={() => handleClick(user.username)}>
           <h3>{user.username}</h3>
           <p>name: {user.name}</p>
           <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
