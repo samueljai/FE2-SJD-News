@@ -44,8 +44,8 @@ class Topics extends Component {
       .catch(err => console.log(err))
   }
 
-  handleClick = slug => {
-    navigate(`/topics/${slug}/articles`);
+  handleClick = topic => {
+    navigate(`/topics/${topic}/articles`);
   }
 }
 

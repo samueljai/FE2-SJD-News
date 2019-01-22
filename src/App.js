@@ -6,6 +6,7 @@ import NavBar from './Components/NavBar';
 import Articles from './Components/Articles';
 import Topics from './Components/Topics';
 import Users from './Components/Users';
+import SingleArticle from './Components/SingleArticle';
 
 class App extends Component {
 
@@ -25,8 +26,9 @@ class App extends Component {
         <Router className="mainDisplay">
           <Homepage path="/" toggleSidebar={this.toggleSidebar} />
           <Topics path="/topics" toggleSidebar={this.toggleSidebar} />
-          <Articles path="/topics/:slug/articles" toggleSidebar={this.toggleSidebar} />
+          <Articles path="/topics/:topic/articles" toggleSidebar={this.toggleSidebar} />
           <Articles path="/articles" toggleSidebar={this.toggleSidebar} />
+          <SingleArticle path="articles/:article_id" toggleSidebar={this.toggleSidebar} />
           <Users path="/users" toggleSidebar={this.toggleSidebar} />
         </Router>
       </div>

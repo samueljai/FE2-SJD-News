@@ -9,13 +9,13 @@ class Articles extends Component {
   state = {
     loading: true,
     articles: [],
-    slug: ''
+    topic: ''
   }
 
   render() {
-    const { toggleSidebar, slug } = this.props;
+    const { toggleSidebar, topic } = this.props;
     const { articles, loading } = this.state
-    const heading = slug ? `${slug.charAt(0).toUpperCase() + slug.slice(1)} Articles` : 'Articles'
+    const heading = topic ? `${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles` : 'Articles'
 
     if (!loading) {
       return (
@@ -44,7 +44,7 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const topicUpdated = prevProps.slug !== this.props.slug;
+    const topicUpdated = prevProps.topic !== this.props.topic;
 
     if (topicUpdated) {
       this.fetchArticles();
@@ -52,16 +52,16 @@ class Articles extends Component {
   }
 
   fetchArticles = () => {
-    const { slug } = this.props;
-    api.getArticles(slug)
+    const { topic } = this.props;
+    api.getArticles(topic)
       .then(articles => {
-        this.setState({ articles, loading: false, slug })
+        this.setState({ articles, loading: false, topic })
       })
       .catch(err => console.log(err))
   }
 
-  handleClick = slug => {
-    navigate(`/topics/${slug}/articles`);
+  handleClick = article_id => {
+    navigate(`/articles/${article_id}`);
   }
 }
 

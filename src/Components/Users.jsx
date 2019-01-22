@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/Users.css'
-import ListUsers from './ListUsers';
+import { navigate } from '@reach/router';
 import * as api from '../Utils/api'
 
 class Users extends Component {
@@ -18,7 +18,13 @@ class Users extends Component {
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading="Users" />
           <main>
-            <ListUsers users={users} />
+            {users.map(user => (
+              <div className="card" key={user.username} onClick={() => this.handleClick(user.username)}>
+                <h3>{user.username}</h3>
+                <p>name: {user.name}</p>
+                <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
+              </div>
+            ))}
           </main>
         </React.Fragment>
       )
@@ -34,6 +40,10 @@ class Users extends Component {
     api.getUsers()
       .then(users => this.setState({ users, loading: false }))
       .catch(err => console.log(err))
+  }
+
+  handleClick = username => {
+    navigate(`/user/${username}`);
   }
 }
 
