@@ -9,7 +9,6 @@ class Articles extends Component {
   state = {
     loading: true,
     articles: [],
-    topic: '',
     page: 1,
     isLastPage: false,
   }
@@ -24,8 +23,10 @@ class Articles extends Component {
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading={heading} />
           <main>
-            <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
-            <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
+            <div>
+              <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
+              <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
+            </div>
             {articles.map(article => {
               return (
                 <div className="card" key={article.article_id} onClick={() => this.handleClick(article.article_id)}>
@@ -61,13 +62,11 @@ class Articles extends Component {
     const { page } = this.state;
     api.getArticles(topic, page)
       .then(articles => {
-        console.log(articles)
-        this.setState({ articles, topic })
+        this.setState({ articles })
       })
       .catch(err => console.log(err))
     api.getArticles(topic, page + 1)
       .then(articles => {
-        console.log(articles)
         if (!articles.length) this.setState({ isLastPage: true, loading: false })
         else this.setState({ isLastPage: false, loading: false })
       })
