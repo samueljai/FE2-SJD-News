@@ -9,12 +9,14 @@ class Articles extends Component {
   state = {
     loading: true,
     articles: [],
-    topic: ''
+    topic: '',
+    page: 1,
+    isLastPage: false,
   }
 
   render() {
     const { toggleSidebar, topic } = this.props;
-    const { articles, loading } = this.state
+    const { articles, loading, page, isLastPage } = this.state
     const heading = topic ? `${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles` : 'Articles'
 
     if (!loading) {
@@ -22,6 +24,8 @@ class Articles extends Component {
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading={heading} />
           <main>
+            <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
+            <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
             {articles.map(article => {
               return (
                 <div className="card" key={article.article_id} onClick={() => this.handleClick(article.article_id)}>
@@ -45,23 +49,43 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const topicUpdated = prevProps.topic !== this.props.topic;
-
-    if (topicUpdated) {
+    const pageUpdated = prevState.page !== this.state.page;
+    if (topicUpdated) this.resetPageNumber();
+    if (pageUpdated || (topicUpdated && this.state.page === 1)) {
       this.fetchArticles();
     }
   }
 
   fetchArticles = () => {
     const { topic } = this.props;
-    api.getArticles(topic)
+    const { page } = this.state;
+    api.getArticles(topic, page)
       .then(articles => {
-        this.setState({ articles, loading: false, topic })
+        console.log(articles)
+        this.setState({ articles, topic })
       })
       .catch(err => console.log(err))
+    api.getArticles(topic, page + 1)
+      .then(articles => {
+        console.log(articles)
+        if (!articles.length) this.setState({ isLastPage: true, loading: false })
+        else this.setState({ isLastPage: false, loading: false })
+      })
+      .catch(err => this.setState({ isLastPage: true, loading: false }))
   }
 
   handleClick = article_id => {
     navigate(`/articles/${article_id}`);
+  }
+
+  updatePageNumber = direction => {
+    this.setState(({ page }) => ({
+      page: page + direction
+    }))
+  }
+
+  resetPageNumber = () => {
+    this.setState({ page: 1 })
   }
 }
 
