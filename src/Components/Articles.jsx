@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/Articles.css'
-import ListArticles from './ListArticles';
+import { navigate } from '@reach/router';
 import * as api from '../Utils/api'
 
 class Articles extends Component {
@@ -22,7 +22,16 @@ class Articles extends Component {
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading={heading} />
           <main>
-            <ListArticles articles={articles} />
+            {articles.map(article => {
+              return (
+                <div className="card" key={article.article_id} onClick={() => this.handleClick(article.article_id)}>
+                  <p>{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
+                  <h3>{article.title}</h3>
+                  <p>by {article.author}</p>
+                  <h4>{article.topic}</h4>
+                </div>
+              )
+            })}
           </main>
         </React.Fragment>
       )
@@ -34,6 +43,14 @@ class Articles extends Component {
     this.fetchArticles();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const topicUpdated = prevProps.slug !== this.props.slug;
+
+    if (topicUpdated) {
+      this.fetchArticles();
+    }
+  }
+
   fetchArticles = () => {
     const { slug } = this.props;
     api.getArticles(slug)
@@ -41,6 +58,10 @@ class Articles extends Component {
         this.setState({ articles, loading: false, slug })
       })
       .catch(err => console.log(err))
+  }
+
+  handleClick = slug => {
+    navigate(`/topics/${slug}/articles`);
   }
 }
 

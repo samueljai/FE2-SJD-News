@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/Topics.css'
-import ListTopics from './ListTopics';
+import { navigate } from '@reach/router';
 import * as api from '../Utils/api'
 
 
@@ -21,7 +21,12 @@ class Topics extends Component {
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading="Topics" />
           <main>
-            <ListTopics topics={topics} />
+            {topics.map(topic => (
+              <div className="card" key={topic.slug} onClick={() => this.handleClick(topic.slug)}>
+                <h3>{topic.slug}</h3>
+                <p>Description: {topic.description}</p>
+              </div>
+            ))}
           </main>
         </React.Fragment>
       )
@@ -37,6 +42,10 @@ class Topics extends Component {
     api.getTopics()
       .then(topics => this.setState({ topics, loading: false }))
       .catch(err => console.log(err))
+  }
+
+  handleClick = slug => {
+    navigate(`/topics/${slug}/articles`);
   }
 }
 
