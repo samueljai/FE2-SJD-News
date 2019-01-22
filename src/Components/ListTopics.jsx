@@ -1,19 +1,17 @@
 import React from 'react';
 import { navigate } from '@reach/router';
 
+
 const ListTopics = ({ topics }) => {
   return (
-    <ul>
+    <React.Fragment>
       {topics.map(topic => (
-        <li key={`${topic.slug}`} onClick={() => handleClick(topic.slug)}>
+        <div className="card" onClick={() => handleClick(topic.slug)}>
           <h3>{topic.slug}</h3>
-          <p>
-            Description: {topic.description}
-          </p>
-        </li>
-      ))
-      }
-    </ul >
+          <p>Description: {topic.description}</p>
+        </div>
+      ))}
+    </React.Fragment>
   );
 };
 

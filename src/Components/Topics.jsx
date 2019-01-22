@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import '../CSS/Articles.css'
+import '../CSS/Topics.css'
 import ListTopics from './ListTopics';
 
 class Topics extends Component {

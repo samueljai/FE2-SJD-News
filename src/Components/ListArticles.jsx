@@ -3,17 +3,13 @@ import { navigate } from '@reach/router';
 
 const ListArticles = ({ articles }) => {
   return (
-    <ul>
+    <React.Fragment>
       {articles.map(article => (
-        <li key={`${article.created_at}`} onClick={() => handleClick(article.title)}>
+        <div className="card" onClick={() => handleClick(article.title)}>
           <h3>{article.title}</h3>
-          <p>
-            Description: {article.body}
-          </p>
-        </li>
-      ))
-      }
-    </ul >
+        </div>
+      ))}
+    </React.Fragment>
   );
 };
 
