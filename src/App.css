@@ -1,40 +1,83 @@
-.App * {
-  border: 1px solid red
-}
-
+/* Mobile-First: Screens below 750px */
 .App {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 15% auto;
-  grid-template-areas: 'leftPanel mainDisplay';
+  grid-template-columns: 1fr; /* sidebar hidden on mobile so only 1 column for the App*/
+  grid-template-rows: 1fr 6fr;
+  grid-template-areas: 
+  'mainDisplay' 
+  'mainDisplay';
 }
 
-.leftPanel {
-  grid-area: leftPanel;
+.App * {
+  transition: all .6s ease-in-out;
+}
+
+.sidebar {    
+  grid-area: sidebar;
   display: grid;
-  grid-template-rows: 15% auto;
-  grid-template-areas: 'logo' 'navPanel';
+  grid-template-rows: 1fr 6fr;
+  grid-template-areas: 
+  'navBar' 
+  'navBar';
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  overflow-y: auto;
+  transform: translateX(-245px);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  background-color: #394263;
 }
 
-.logo {
-  grid-area: logo;
-}
-
-.navPanel {
-  grid-area: navPanel;
+.sidebar.active {
+  transform: translateX(0);
 }
 
 .mainDisplay {
   grid-area: mainDisplay;
-  height: 100%;
-  width: 100%;
+  border: 1px solid black;
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  grid-template-areas: 
+  'header' 
+  'main';
 }
 
 .mainHeader {
-  height: 10%;
+  grid-area: header;
+  background-color: rgba(0, 0, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 main {
-  height: 90%;
+  grid-area: main;
+  background-color: rgba(255, 174, 0, 0.5);
+}
+
+/* Tablet: Screens above 700px and below 750px */
+@media only screen and (min-width: 700px) {
+}
+
+/* Non-mobile: Screens above 750px */
+@media only screen and (min-width: 750px) {
+  /* Show the sidebar */
+  .App {
+    grid-template-columns: 1fr 6fr; /* Add another colum in for to show side nav for non-mobile screens */
+    grid-template-areas: 
+      'sidebar mainDisplay' 
+      'sidebar mainDisplay';
+  }
+
+  .sidebar {    
+    position: relative;
+    transform: translateX(0);
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+    grid-template-areas: 
+    'logo' 
+    'navBar';
+  }
 }

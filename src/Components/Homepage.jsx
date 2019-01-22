@@ -1,11 +1,14 @@
 import React from 'react';
+import Header from './Header';
+import '../CSS/Homepage.css'
 
-const Homepage = () => {
+const Homepage = ({ toggleSidebar }) => {
+
   return (
-    <main>
-      <header className="mainHeader">Header</header>
-      app main
-    </main>
+    <React.Fragment>
+      <Header toggleSidebar={toggleSidebar} heading="" />
+      <main>Homepage</main>
+    </React.Fragment>
   );
 };
 

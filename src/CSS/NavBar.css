@@ -1,0 +1,39 @@
+/* Mobile-First: Screens below 700px */
+.logo {
+  display: none;
+}
+.navBar {
+  grid-area: navBar;
+  display: flex;
+  flex-direction: column;
+}
+.navListItem {
+  padding: 20px 20px 20px 40px;
+  color: #ddd;
+}
+
+.navListItem:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+/* Tablet: Screens above 700px and below 750px */
+@media only screen and (min-width: 700px) {
+}
+
+/* Non-mobile: Screens above 750px */
+@media only screen and (min-width: 750px) {
+  /* Show the sidebar */
+  .navBar {
+    grid-area: navBar;
+    background-color: rgba(0, 255, 0, 0.5);
+  }
+
+  .logo {
+    grid-area: logo;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+}

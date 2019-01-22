@@ -1,0 +1,7 @@
+/* Tablet: Screens above 700px and below 750px */
+@media only screen and (min-width: 700px) {
+}
+
+/* Non-mobile: Screens above 750px */
+@media only screen and (min-width: 750px) {
+}

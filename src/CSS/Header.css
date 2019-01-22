@@ -1,0 +1,77 @@
+.menu-button {
+  position: absolute;
+  left: 8px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 0px;
+  border: none;
+  height: 48px;
+  margin: 0px;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0px;
+  width: 48px;
+  transition: all 0.3s;
+}
+.menu-button:hover, .menu-button:focus, .menu-button:active {
+  outline: none;
+}
+.menu-button.active > .bar {
+  background-color: transparent;
+  transition: 0.2s;
+}
+.menu-button.active > .bar:before {
+  transform: rotate(45deg) translate(4px, 9px);
+  transition: 0.3s;
+  width: 28px;
+  left: 1px;
+}
+.menu-button.active > .bar:after {
+  transform: rotate(-45deg) translate(3px, -7px);
+  transition: 0.3s;
+  width: 28px;
+  left: 1px;
+}
+.bar {
+  background-color: black;
+  width: 24px;
+  height: 3px;
+  margin: 4px auto;
+  border-radius: 3px;
+  display: block;
+  position: relative;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+.bar:before, .bar:after {
+  content: '';
+  background-color: black;
+  border-radius: 3px;
+  width: 24px;
+  height: 3px;
+  margin: 4px auto;
+  position: absolute;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+.bar:before {
+  top: -12px;
+  left: 0px;
+}
+.bar:after {
+  bottom: -12px;
+  left: 0px;
+}
+
+
+/* Tablet: Screens above 700px and below 750px */
+@media only screen and (min-width: 700px) {
+}
+
+/* Non-mobile: Screens above 750px */
+@media only screen and (min-width: 750px) {
+  /* Show the sidebar */
+  .menu-button {
+    display: none
+  }
+}
