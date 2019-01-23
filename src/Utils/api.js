@@ -38,7 +38,6 @@ export const addNewTopic = async (slug, description) => {
     slug,
     description
   });
-  console.log('new topic: ', data)
   return data.topic;
 }
 
@@ -48,6 +47,23 @@ export const addNewArticle = async (topic, title, body, username) => {
     body,
     username
   })
-  console.log('new article: ', data)
   return data.article
+};
+
+export const addCommentByArticleId = async (article_id, username, body) => {
+  const { data } = await axios.post(`${BASE_URL}/articles/${article_id}/comments`, {
+    username,
+    body
+  })
+  return data.comment
+};
+
+export const deleteArticle = async (article_id) => {
+  const { data } = await axios.delete(`${BASE_URL}/articles/${article_id}`)
+  return data
+};
+
+export const deleteCommentByArticleId = async (article_id, comment_id) => {
+  const { data } = await axios.delete(`${BASE_URL}/articles/${article_id}/comments/${comment_id}`)
+  return data
 };

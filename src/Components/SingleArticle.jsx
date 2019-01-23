@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Comments from './Comments';
+import { navigate } from '@reach/router';
 import '../CSS/Articles.css'
 import * as api from '../Utils/api'
 
@@ -10,13 +11,15 @@ class SingleArticle extends Component {
     commentsLoading: true,
     article: {},
     comments: [],
+    commentCount: 0,
     page: 1,
     isLastPage: false,
+    newComment: "",
   }
 
   render() {
-    const { toggleSidebar } = this.props;
-    const { article, articlesLoading, comments, commentsLoading, page, isLastPage } = this.state
+    const { toggleSidebar, loggedIn, user: { username } } = this.props;
+    const { article, articlesLoading, comments, commentCount, commentsLoading, page, isLastPage, newComment } = this.state
 
     if (!articlesLoading && !commentsLoading) {
       return (
@@ -24,12 +27,16 @@ class SingleArticle extends Component {
           <Header toggleSidebar={toggleSidebar} heading={article.title} />
           <main>
             <div className="articleCard">
-              <img></img>
               <div className="articleInfo">
                 <p>{article.topic}</p>
-                <p>{article.created_at}</p>
+                <p>{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
                 <p>{article.author}</p>
-                <p>{article.comment_count} Comments</p>
+                <p>{commentCount} Comments</p>
+                <button onClick={() => this.updateArticleVote(-1)} >Vote Down</button>
+                <button onClick={() => this.updateArticleVote(1)} >Vote Up</button>
+                {article.author === username &&
+                  (<button onClick={() => this.deleteArticle(article.article_id)} >Delete</button>)
+                }
               </div>
               <div className="articlBody">
                 <p>{article.body}</p>
@@ -37,8 +44,14 @@ class SingleArticle extends Component {
               <div className="commentsBox">
                 <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
                 <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
-                <h3>{article.comment_count} Comments</h3>
-                <Comments comments={comments} />
+                <h3>{commentCount} Comments</h3>
+                {(loggedIn) &&
+                  <form onSubmit={this.handleSubmit}> New Comment:
+                    <textarea required id="newComment" value={newComment} onChange={this.handleChange} placeholder="Enter a new comment..." />
+                    <button type="submit">Submit Comment</button>
+                  </form>
+                }
+                <Comments comments={comments} username={username} deleteComment={this.deleteComment} updateCommentVotes={this.updateCommentVotes} />
               </div>
             </div>
           </main>
@@ -56,8 +69,10 @@ class SingleArticle extends Component {
   componentDidUpdate(prevProps, prevState) {
     const articleUpdated = prevProps.article_id !== this.props.article_id;
     const pageUpdated = prevState.page !== this.state.page;
+    const commentsUpdated = prevState.comments.length !== this.state.comments.length;
+
     if (articleUpdated) this.resetPageNumber();
-    if (pageUpdated || (articleUpdated && this.state.page === 1)) {
+    if (commentsUpdated || pageUpdated || (articleUpdated && this.state.page === 1)) {
       this.fetchCommentsByArticleId();
     }
   }
@@ -66,7 +81,7 @@ class SingleArticle extends Component {
     const { article_id } = this.props;
     api.getArticleById(article_id)
       .then(article => {
-        this.setState({ article, articlesLoading: false })
+        this.setState({ article, commentCount: article.comment_count, articlesLoading: false })
       })
       .catch(err => console.log(err))
   }
@@ -96,6 +111,52 @@ class SingleArticle extends Component {
   resetPageNumber = () => {
     this.setState({ page: 1 })
   }
+
+  handleChange = (event) => {
+    const { id, value } = event.target;
+    this.setState({
+      [id]: value
+    })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    // get username from the state, articleId, username, body
+    const { article_id, user: { username } } = this.props
+    const { newComment } = this.state
+    api.addCommentByArticleId(article_id, username, newComment)
+      .then(comment => {
+        this.setState(({ comments, commentCount }) => ({
+          comments: comments.concat(comment),
+          commentCount: commentCount + 1,
+          newComment: ""
+        }))
+      })
+      .catch(err => console.log(err))
+  }
+
+  deleteComment = (comment_id) => {
+    const { article_id } = this.props;
+    api.deleteCommentByArticleId(article_id, comment_id)
+      .then(() => {
+        this.setState(({ commentCount }) => ({
+          commentCount: commentCount - 1,
+        }))
+        this.fetchCommentsByArticleId()
+      })
+      .catch(err => console.log(err));
+  };
+
+  deleteArticle = (article_id) => {
+    api.deleteArticle(article_id)
+      .then(() => {
+        // navigate to the articles page once deleted
+        navigate(`/articles`);
+      })
+      .catch(err => console.log(err));
+  };
+
+
 }
 
 export default SingleArticle;

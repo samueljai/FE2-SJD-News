@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/NewArticle.css';
 import * as api from '../Utils/api';
+import { navigate } from '@reach/router';
 
 class NewArticle extends Component {
 
@@ -121,9 +122,10 @@ class NewArticle extends Component {
     api.addNewArticle(topic, newArticleName, newArticleBody, username)
       .then(article => {
         this.setState({ newArticleID: article[0].article_id })
+        // navigate to the singlearticle page using article.article id
+        navigate(`/articles/${article[0].article_id}`);
       })
       .catch(err => console.log(err))
-    // navigate to the singlearticle page using article.article id
   }
 
 }

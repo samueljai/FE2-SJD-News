@@ -34,7 +34,7 @@ class App extends Component {
           <Articles path="/articles" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
           <NewArticle path="/new_article/" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} user={user} />
           <NewArticle path="/new_article/:topic" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} user={user} />
-          <SingleArticle path="articles/:article_id" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
+          <SingleArticle path="articles/:article_id" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} user={user} />
           <Users path="/users" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
         </Router>
       </div>
