@@ -29,11 +29,16 @@ class Articles extends Component {
             <div>
               <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
               <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
-              <select value={sort_by} onChange={this.handleChange} >
+              <select value={sort_by} onChange={this.handleSortChange} >
                 <option default value="">Sort By:</option>
                 <option key="created_at" value="created_at">Date Created</option>
                 <option key="comment_count" value="comment_count">Comments</option>
                 <option key="votes" value="votes">Votes</option>
+              </select >
+              <select value={asc_order} onChange={this.handleOrderChange} >
+                <option default value="">Order:</option>
+                <option key="desc" value="false">Descening</option>
+                <option key="asc" value="true">Ascending</option>
               </select >
             </div>
             {articles.map(article => {
@@ -65,8 +70,9 @@ class Articles extends Component {
     const topicUpdated = prevProps.topic !== this.props.topic;
     const pageUpdated = prevState.page !== this.state.page;
     const sortByUpdated = prevState.sort_by !== this.state.sort_by;
+    const orderUpdated = prevState.asc_order !== this.state.asc_order;
     if (topicUpdated || sortByUpdated) this.resetPageNumber();
-    if (sortByUpdated || pageUpdated || (topicUpdated && this.state.page === 1)) {
+    if (orderUpdated || sortByUpdated || pageUpdated || (topicUpdated && this.state.page === 1)) {
       this.fetchArticles();
     }
   }
@@ -101,10 +107,17 @@ class Articles extends Component {
     this.setState({ page: 1 })
   }
 
-  handleChange = event => {
+  handleSortChange = event => {
     const { value } = event.target;
     this.setState({
       sort_by: value,
+    });
+  };
+
+  handleOrderChange = event => {
+    const { value } = event.target;
+    this.setState({
+      asc_order: value,
     });
   };
 }
