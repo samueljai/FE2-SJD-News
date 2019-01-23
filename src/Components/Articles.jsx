@@ -24,7 +24,7 @@ class Articles extends Component {
     if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} />
+          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} />
           <main>
             <div>
               <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
@@ -120,6 +120,12 @@ class Articles extends Component {
       asc_order: value,
     });
   };
+
+  handleNewArticle = () => {
+    const { topic } = this.props;
+    const URL = topic ? `/new_article/${topic.charAt(0).toUpperCase() + topic.slice(1)}` : `/new_article/`
+    navigate(URL)
+  }
 }
 
 export default Articles;

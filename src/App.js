@@ -8,6 +8,7 @@ import Topics from './Components/Topics';
 import Users from './Components/Users';
 import SingleArticle from './Components/SingleArticle';
 import * as api from './Utils/api';
+import NewArticle from './Components/NewArticle';
 
 class App extends Component {
 
@@ -31,11 +32,18 @@ class App extends Component {
           <Topics path="/topics" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
           <Articles path="/topics/:topic/articles" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
           <Articles path="/articles" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
+          <NewArticle path="/new_article/" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
+          <NewArticle path="/new_article/:topic" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
           <SingleArticle path="articles/:article_id" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
           <Users path="/users" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
         </Router>
       </div>
     );
+  }
+
+  componentDidMount() {
+    // once page rendered, check session storage if user already logged in
+    this.checkLoggedInStorage()
   }
 
   toggleSidebar = () => {
@@ -65,6 +73,18 @@ class App extends Component {
       user: {},
       loggedIn: false,
     });
+  }
+
+  // function to check if already logged in
+  checkLoggedInStorage = () => {
+    const storedState = sessionStorage.getItem('state')
+
+    // if user already logged in then storedstate will be true
+    if (storedState) {
+      // if true, setstate to that of session storage
+      this.setState(JSON.parse(storedState));
+    }
+    // if false do nothing
   }
 }
 

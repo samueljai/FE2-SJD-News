@@ -1,0 +1,13 @@
+.newArticleMain {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.newArticleMain > div {
+  border: 1px solid red;
+}
+
+.newArticleMain > form {
+  border: 1px solid red;
+}

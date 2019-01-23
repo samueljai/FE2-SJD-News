@@ -17,7 +17,7 @@ class Header extends Component {
           <span className='bar'></span>
         </button>
         <h1>{heading}</h1>
-        {(heading.includes('Articles') && (loggedIn)) && <button>Add New Article</button>}
+        {(heading.includes('Articles') && (loggedIn)) && <button onClick={() => this.handleClick()}>Add New Article</button>}
       </header>
     );
   }
@@ -28,6 +28,12 @@ class Header extends Component {
     this.setState({
       active: !this.state.active
     });
+  }
+
+  // function when new button is called
+  handleClick = () => {
+    const { handleNewArticle } = this.props;
+    handleNewArticle();
   }
 }
 
