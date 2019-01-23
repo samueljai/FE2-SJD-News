@@ -4,6 +4,7 @@ import Comments from './Comments';
 import { navigate } from '@reach/router';
 import '../CSS/Articles.css'
 import * as api from '../Utils/api'
+import Voting from './Voting';
 
 class SingleArticle extends Component {
   state = {
@@ -32,8 +33,7 @@ class SingleArticle extends Component {
                 <p>{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
                 <p>{article.author}</p>
                 <p>{commentCount} Comments</p>
-                <button onClick={() => this.updateArticleVote(-1)} >Vote Down</button>
-                <button onClick={() => this.updateArticleVote(1)} >Vote Up</button>
+                <Voting votes={article.votes} article_id={article.article_id} />
                 {article.author === username &&
                   (<button onClick={() => this.deleteArticle(article.article_id)} >Delete</button>)
                 }
@@ -51,7 +51,7 @@ class SingleArticle extends Component {
                     <button type="submit">Submit Comment</button>
                   </form>
                 }
-                <Comments comments={comments} username={username} deleteComment={this.deleteComment} updateCommentVotes={this.updateCommentVotes} />
+                <Comments article_id={article.article_id} comments={comments} username={username} deleteComment={this.deleteComment} updateCommentVotes={this.updateCommentVotes} />
               </div>
             </div>
           </main>
@@ -156,7 +156,31 @@ class SingleArticle extends Component {
       .catch(err => console.log(err));
   };
 
+  // updateCommentVotes = (article_id, direction, comment_id) => {
+  //   api
+  //     .updateVotesByCommentId(article_id, direction, comment_id)
+  //     .then(comment => this.loadComments(article_id))
+  //     .catch(error => this.setState({ error }));
+  // };
 
+  // updateArticleVote = (articleId, vote) => {
+  //   const { articles } = this.state;
+
+  //   api
+  //     .updateVotesByArticleId(articleId, vote)
+  //     .then(updatedArticle => {
+  //       const updatedArticles = articles.map(article => {
+  //         if (article.article_id === updatedArticle.article_id) {
+  //           return { ...article, votes: updatedArticle.votes };
+  //         } else {
+  //           return article;
+  //         }
+  //       });
+
+  //       this.setState({ articles: updatedArticles });
+  //     })
+  //     .catch(error => this.setState({ error }));
+  // };
 }
 
 export default SingleArticle;

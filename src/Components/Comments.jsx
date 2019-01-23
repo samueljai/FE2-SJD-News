@@ -1,6 +1,7 @@
 import React from 'react';
+import Voting from './Voting';
 
-const Comments = ({ comments, deleteComment, updateCommentVote, username }) => {
+const Comments = ({ article_id, comments, deleteComment, updateCommentVote, username }) => {
   return (
     <React.Fragment>
       {comments.map(comment => (
@@ -9,9 +10,7 @@ const Comments = ({ comments, deleteComment, updateCommentVote, username }) => {
           <p>id: {comment.comment_id}</p>
           <p>{new Date(new Date(comment.created_at).toJSON()).toUTCString().slice(5, 22)}</p>
           <p>{comment.body}</p>
-          <p>{comment.votes}</p>
-          <button onClick={() => updateCommentVote(1, comment.comment_id)} >Vote Up</button>
-          <button onClick={() => updateCommentVote(-1, comment.comment_id)} >Vote Down</button>
+          <Voting votes={comment.votes} article_id={article_id} comment_id={comment.comment_id} />
           {comment.author === username &&
             (<button onClick={() => deleteComment(comment.comment_id)} >Delete</button>)
           }
