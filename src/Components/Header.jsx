@@ -8,14 +8,16 @@ class Header extends Component {
   }
 
   render() {
-    const { heading } = this.props;
+    const { heading, loggedIn } = this.props;
     const buttonClass = this.state.active ? 'menu-button active' : 'menu-button';
+
     return (
       <header className='mainHeader'>
         <button className={buttonClass} onClick={this.toggle}>
           <span className='bar'></span>
         </button>
         <h1>{heading}</h1>
+        {(heading.includes('Articles') && (loggedIn)) && <button>Add New Article</button>}
       </header>
     );
   }

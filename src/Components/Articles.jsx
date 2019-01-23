@@ -17,14 +17,14 @@ class Articles extends Component {
   }
 
   render() {
-    const { toggleSidebar, topic } = this.props;
+    const { toggleSidebar, topic, loggedIn } = this.props;
     const { articles, loading, page, isLastPage, sort_by, asc_order } = this.state
     const heading = topic ? `${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles` : 'Articles'
 
     if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={heading} />
+          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} />
           <main>
             <div>
               <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>

@@ -8,7 +8,6 @@ export const getTopics = async () => {
 }
 
 export const getArticles = async (topic, page, sort_by, asc_order) => {
-  console.log('api', topic, page, sort_by, asc_order)
   const url = topic ? `/topics/${topic}/articles` : '/articles'
   const { data } = await axios.get(`${BASE_URL}${url}?p=${page}&&sort_by=${sort_by}&&sort_ascending=${asc_order}`);
   return data.articles;
@@ -27,4 +26,9 @@ export const getCommentsByArticleId = async (article_id, page) => {
 export const getUsers = async () => {
   const { data } = await axios.get(`${BASE_URL}/users`);
   return data.users;
+}
+
+export const getUserByUsername = async (username) => {
+  const { data } = await axios.get(`${BASE_URL}/users/${username}`);
+  return data.user;
 }
