@@ -7,9 +7,10 @@ export const getTopics = async () => {
   return data.topics;
 }
 
-export const getArticles = async (topic, page) => {
+export const getArticles = async (topic, page, sort_by, asc_order) => {
+  console.log('api', topic, page, sort_by, asc_order)
   const url = topic ? `/topics/${topic}/articles` : '/articles'
-  const { data } = await axios.get(`${BASE_URL}${url}?p=${page}`);
+  const { data } = await axios.get(`${BASE_URL}${url}?p=${page}&&sort_by=${sort_by}&&sort_ascending=${asc_order}`);
   return data.articles;
 }
 
