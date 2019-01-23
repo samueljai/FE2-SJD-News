@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Comments from './Comments';
 import '../CSS/Articles.css'
-import { navigate } from '@reach/router';
 import * as api from '../Utils/api'
 
 class SingleArticle extends Component {
@@ -85,7 +84,7 @@ class SingleArticle extends Component {
         if (!comments.length) this.setState({ isLastPage: true, commentsLoading: false })
         else this.setState({ isLastPage: false, commentsLoading: false })
       })
-      .catch(err => this.setState({ isLastPage: true, loading: false }))
+      .catch(err => this.setState({ isLastPage: true, commentsLoading: false }))
   }
 
   updatePageNumber = direction => {

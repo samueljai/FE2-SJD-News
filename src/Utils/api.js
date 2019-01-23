@@ -32,3 +32,22 @@ export const getUserByUsername = async (username) => {
   const { data } = await axios.get(`${BASE_URL}/users/${username}`);
   return data.user;
 }
+
+export const addNewTopic = async (slug, description) => {
+  const { data } = await axios.post(`${BASE_URL}/topics`, {
+    slug,
+    description
+  });
+  console.log('new topic: ', data)
+  return data.topic;
+}
+
+export const addNewArticle = async (topic, title, body, username) => {
+  const { data } = await axios.post(`${BASE_URL}/topics/${topic}/articles`, {
+    title,
+    body,
+    username
+  })
+  console.log('new article: ', data)
+  return data.article
+};

@@ -8,7 +8,13 @@ class NewArticle extends Component {
   state = {
     loading: true,
     slugs: [],
-    selectedTopic: "New"
+    selectedTopic: "New",
+    newTopicName: "",
+    newTopicDesc: "",
+    newArticleName: "",
+    newArticleBody: "",
+    newTopic: "",
+    newArticleID: 0,
   }
 
   render() {
@@ -33,14 +39,18 @@ class NewArticle extends Component {
                 })}
               </select >
             </div>
-            {(selectedTopic === "New") && <form className="newTopicForm"> if New Topic is selected:
-            <p>New Topic Name Field</p>
-              <p>New Topic Description Field</p>
-            </form>}
-
-            <form className="newArticleForm">
-              <p>Article Title:</p>
-              <p>Article:</p>
+            <form onSubmit={this.handleSubmit} className="newArticleForm">
+              {(selectedTopic === "New") &&
+                <section className="newTopicSection"> New Topic Details:
+                  <input type="text" required id="newTopicName" value={this.state.value} onChange={this.handleChange} placeholder="Enter a New Topic Title" />
+                  <textarea required id="newTopicDesc" value={this.state.value} onChange={this.handleChange} placeholder="Enter a description for your new topic..." />
+                </section>
+              }
+              <section className="newArticleSection"> New Article Details:
+                <input type="text" required id="newArticleName" value={this.state.value} onChange={this.handleChange} placeholder="Enter a New Article Title" />
+                <textarea required id="newArticleBody" value={this.state.value} onChange={this.handleChange} placeholder="Enter your new article..." />
+              </section>
+              <button type="submit">Publish new article</button>
             </form>
           </main>
         </React.Fragment>
@@ -78,6 +88,44 @@ class NewArticle extends Component {
       selectedTopic: value,
     });
   };
+
+  handleChange = (event) => {
+    const { id, value } = event.target;
+    this.setState({
+      [id]: value
+    })
+  }
+
+  // function called when enter has been pressed in the text box, or the submit button has been clicked
+  handleSubmit = (event) => {
+    event.preventDefault();
+    // get information from the state
+    const { newArticleBody, newArticleName, newTopicDesc, newTopicName, selectedTopic } = this.state;
+    const { user: { username } } = this.props
+
+    // if NEW topic has been selected, call addNewTopic first, then addNewArticle
+    // if existing topic, then just addNewArticle
+    if (selectedTopic === "New") {
+      // call the post topic function in the api file, pass in the slug and description
+      // returns the added topic, use topic.slug for the next api call
+      api.addNewTopic(newTopicName, newTopicDesc)
+        .then(({ slug }) => {
+          this.setState({ newTopic: slug })
+        })
+        .catch(err => console.log(err))
+    }
+    // then call the post articlebytopic function with topic, tile, body and username, returns article
+    // reset the state
+    const topic = (selectedTopic === "New") ? newTopicName : selectedTopic
+    console.log('new article topic: ', topic)
+    api.addNewArticle(topic, newArticleName, newArticleBody, username)
+      .then(article => {
+        this.setState({ newArticleID: article[0].article_id })
+      })
+      .catch(err => console.log(err))
+    // navigate to the singlearticle page using article.article id
+  }
+
 }
 
 export default NewArticle;

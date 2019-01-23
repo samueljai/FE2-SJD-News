@@ -11,3 +11,15 @@
 .newArticleMain > form {
   border: 1px solid red;
 }
+
+.newTopicSection textarea {
+  resize: none;
+  width: 90%;
+  height: 50%;
+}
+
+.newArticleSection textarea {
+  resize: none;
+  width: 100%;
+  height: 50%;
+}
