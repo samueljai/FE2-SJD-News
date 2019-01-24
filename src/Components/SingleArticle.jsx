@@ -81,7 +81,7 @@ class SingleArticle extends Component {
     const { article_id } = this.props;
     api.getArticleById(article_id)
       .then(article => {
-        this.setState({ article, commentCount: article.comment_count, articlesLoading: false })
+        this.setState({ article, commentCount: parseInt(article.comment_count), articlesLoading: false })
       })
       .catch(err => console.log(err))
   }
@@ -126,11 +126,13 @@ class SingleArticle extends Component {
     const { newComment } = this.state
     api.addCommentByArticleId(article_id, username, newComment)
       .then(comment => {
-        this.setState(({ comments, commentCount }) => ({
-          comments: comments.concat(comment),
-          commentCount: commentCount + 1,
-          newComment: ""
-        }))
+        this.setState(({ comments, commentCount }) => {
+          return ({
+            comments: comments.concat(comment),
+            commentCount: commentCount + 1,
+            newComment: ""
+          })
+        })
       })
       .catch(err => console.log(err))
   }
@@ -155,32 +157,6 @@ class SingleArticle extends Component {
       })
       .catch(err => console.log(err));
   };
-
-  // updateCommentVotes = (article_id, direction, comment_id) => {
-  //   api
-  //     .updateVotesByCommentId(article_id, direction, comment_id)
-  //     .then(comment => this.loadComments(article_id))
-  //     .catch(error => this.setState({ error }));
-  // };
-
-  // updateArticleVote = (articleId, vote) => {
-  //   const { articles } = this.state;
-
-  //   api
-  //     .updateVotesByArticleId(articleId, vote)
-  //     .then(updatedArticle => {
-  //       const updatedArticles = articles.map(article => {
-  //         if (article.article_id === updatedArticle.article_id) {
-  //           return { ...article, votes: updatedArticle.votes };
-  //         } else {
-  //           return article;
-  //         }
-  //       });
-
-  //       this.setState({ articles: updatedArticles });
-  //     })
-  //     .catch(error => this.setState({ error }));
-  // };
 }
 
 export default SingleArticle;
