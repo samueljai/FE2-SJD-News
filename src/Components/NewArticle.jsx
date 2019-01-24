@@ -118,7 +118,6 @@ class NewArticle extends Component {
     // then call the post articlebytopic function with topic, tile, body and username, returns article
     // reset the state
     const topic = (selectedTopic === "New") ? newTopicName : selectedTopic
-    console.log('new article topic: ', topic)
     api.addNewArticle(topic, newArticleName, newArticleBody, username)
       .then(article => {
         this.setState({ newArticleID: article[0].article_id })

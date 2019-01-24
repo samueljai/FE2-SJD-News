@@ -69,9 +69,9 @@ class SingleArticle extends Component {
   componentDidUpdate(prevProps, prevState) {
     const articleUpdated = prevProps.article_id !== this.props.article_id;
     const pageUpdated = prevState.page !== this.state.page;
-    const commentsUpdated = prevState.comments.length !== this.state.comments.length;
+    const commentsUpdated = prevState.commentCount !== this.state.commentCount;
 
-    if (articleUpdated) this.resetPageNumber();
+    if (commentsUpdated || articleUpdated) this.resetPageNumber();
     if (commentsUpdated || pageUpdated || (articleUpdated && this.state.page === 1)) {
       this.fetchCommentsByArticleId();
     }
@@ -93,7 +93,7 @@ class SingleArticle extends Component {
       .then(comments => {
         this.setState({ comments, commentsLoading: false })
       })
-      .catch(err => console.log(err))
+      .catch(err => this.setState({ comments: [] }))
     api.getCommentsByArticleId(article_id, page + 1)
       .then(comments => {
         if (!comments.length) this.setState({ isLastPage: true, commentsLoading: false })
@@ -144,7 +144,6 @@ class SingleArticle extends Component {
         this.setState(({ commentCount }) => ({
           commentCount: commentCount - 1,
         }))
-        this.fetchCommentsByArticleId()
       })
       .catch(err => console.log(err));
   };
