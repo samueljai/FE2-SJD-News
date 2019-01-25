@@ -11,7 +11,7 @@ class Topics extends Component {
   state = {
     loading: true,
     topics: [],
-    err: "true",
+    err: "",
   }
 
   render() {
