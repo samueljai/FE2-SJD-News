@@ -42,7 +42,9 @@ class Users extends Component {
   fetchUsers = () => {
     api.getUsers()
       .then(users => this.setState({ users, loading: false }))
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
   }
 
   handleClick = username => {

@@ -70,7 +70,9 @@ class App extends Component {
         this.setState({ user, loggedIn: true })
         sessionStorage.setItem('state', JSON.stringify(this.state))
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({ err: err })
+      })
     // if not successful, log error "user does not exisit"
   }
 

@@ -84,7 +84,9 @@ class NewArticle extends Component {
         const slugs = topics.map((topic) => topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)).sort()
         this.setState({ slugs, loading: false })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
   }
 
   handleTopicSelect = event => {
@@ -117,7 +119,9 @@ class NewArticle extends Component {
           this.setState({ newTopic: slug })
         })
         .then(() => this.submitNewArticle())
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.setState({ err: err })
+        })
     } else {
       this.submitNewArticle()
     }
@@ -138,7 +142,9 @@ class NewArticle extends Component {
         // navigate to the singlearticle page using article.article id
         navigate(`/articles/${article[0].article_id}`);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
   }
 
 }

@@ -90,13 +90,15 @@ class Articles extends Component {
       .then(articles => {
         this.setState({ articles })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
     api.getArticles(topic, page + 1, sort_by, asc_order)
       .then(articles => {
         if (!articles.length) this.setState({ isLastPage: true, loading: false })
         else this.setState({ isLastPage: false, loading: false })
       })
-      .catch(err => this.setState({ isLastPage: true, loading: false }))
+      .catch(err => this.setState({ err, isLastPage: true, loading: false }))
   }
 
   handleClick = article_id => {

@@ -44,7 +44,9 @@ class Topics extends Component {
   fetchTopics = () => {
     api.getTopics()
       .then(topics => this.setState({ topics, loading: false }))
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
   }
 
   handleClick = topic => {

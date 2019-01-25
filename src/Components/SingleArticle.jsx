@@ -86,7 +86,9 @@ class SingleArticle extends Component {
       .then(article => {
         this.setState({ article, commentCount: parseInt(article.comment_count), articlesLoading: false })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
   }
 
   fetchCommentsByArticleId = () => {
@@ -96,13 +98,13 @@ class SingleArticle extends Component {
       .then(comments => {
         this.setState({ comments, commentsLoading: false })
       })
-      .catch(err => this.setState({ comments: [] }))
+      .catch(err => this.setState({ err, comments: [] }))
     api.getCommentsByArticleId(article_id, page + 1)
       .then(comments => {
         if (!comments.length) this.setState({ isLastPage: true, commentsLoading: false })
         else this.setState({ isLastPage: false, commentsLoading: false })
       })
-      .catch(err => this.setState({ isLastPage: true, commentsLoading: false }))
+      .catch(err => this.setState({ err, isLastPage: true, commentsLoading: false }))
   }
 
   updatePageNumber = direction => {
@@ -137,7 +139,9 @@ class SingleArticle extends Component {
           })
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.setState({ err: err })
+      })
   }
 
   deleteComment = (comment_id) => {
@@ -148,7 +152,9 @@ class SingleArticle extends Component {
           commentCount: commentCount - 1,
         }))
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({ err: err })
+      })
   };
 
   deleteArticle = (article_id) => {
@@ -157,7 +163,9 @@ class SingleArticle extends Component {
         // navigate to the articles page once deleted
         navigate(`/articles`);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({ err: err })
+      })
   };
 }
 

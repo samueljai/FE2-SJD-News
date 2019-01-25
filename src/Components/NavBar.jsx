@@ -18,7 +18,8 @@ const NavBar = ({ toggleSidebar, user, loggedIn, login, logout }) => {
           <h6>Developed by:</h6>
           <h4>Samuel Jai</h4>
           <h6>On A Full Stack Developer Journey</h6>
-          <p>GitHub | LinkedIn | Twitter</p>
+          <h4>© 2019</h4>
+          <p><a href="https://github.com/samueljai" rel="noopener noreferrer" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/sam-desai" rel="noopener noreferrer" target="_blank">LinkedIn</a> | <a href="https://twitter.com/thisissamueljai" rel="noopener noreferrer" target="_blank">Twitter</a></p>
         </div>
       </nav>
     </React.Fragment>
