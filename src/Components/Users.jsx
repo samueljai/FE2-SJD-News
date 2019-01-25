@@ -16,7 +16,7 @@ class Users extends Component {
     if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading="Users" />
+          <Header toggleSidebar={toggleSidebar} heading="Users" display={true} />
           <main>
             {users.map(user => (
               <div className="card" key={user.username} onClick={() => this.handleClick(user.username)}>

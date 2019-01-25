@@ -1,76 +1,42 @@
 /* Mobile-First: Screens below 750px */
 .App {
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template-columns: 1fr; /* sidebar hidden on mobile so only 1 column for the App*/
-  grid-template-rows: 1fr 6fr;
   grid-template-areas: 
-  'mainDisplay' 
   'mainDisplay';
+  width: 100%;
+  height: 100%;
 }
 
 .App * {
-  transition: all .6s ease-in-out;
-}
-
-.sidebar {    
-  grid-area: sidebar;
-  display: grid;
-  grid-template-rows: 1fr 6fr;
-  grid-template-areas: 
-  'navBar' 
-  'navBar';
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  overflow-y: auto;
-  transform: translateX(-100%);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  background-color: #394263;
-}
-
-.sidebar.active {
-  transform: translateX(0);
+  font-family: vision1;
 }
 
 .mainDisplay {
   grid-area: mainDisplay;
-  border: 1px solid black;
-  display: grid;
-  grid-template-rows: 1fr 6fr;
-  grid-template-areas: 
-  'header' 
-  'main';
-}
-
-.mainHeader {
-  grid-area: header;
-  background-color: rgba(0, 0, 255, 0.5);
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
 main {
-  grid-area: main;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
+  background-color: #f5f5f5;
+  height: 100%;
+  width: 100%;
 }
 
 main > .card {
-    border: 1px solid red;
-    background-color: rgba(255, 174, 0, 0.5);
+    background-color: white;
+    border: 1px solid #AB987A;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 30%;
-    min-width: 135px;
     border-radius: 5px;
-    height: 50%;
-    max-height: 400px;
-    margin: 10px;
+    height: 25%;
+    width: 100%;
 }
 
 main > .card:hover {
@@ -83,22 +49,4 @@ main > .card:hover {
 
 /* Non-mobile: Screens above 750px */
 @media only screen and (min-width: 750px) {
-  /* Show the sidebar */
-  .App {
-    grid-template-columns: 1fr 6fr; /* Add another colum in for to show side nav for non-mobile screens */
-    grid-template-areas: 
-      'sidebar mainDisplay' 
-      'sidebar mainDisplay';
-  }
-
-  .sidebar {    
-    position: relative;
-    transform: translateX(0);
-    display: grid;
-    grid-template-rows: 1fr 6fr;
-    grid-template-areas: 
-    'logo' 
-    'navBar';
-    width: 100%;
-  }
 }

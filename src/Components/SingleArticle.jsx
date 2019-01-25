@@ -25,7 +25,7 @@ class SingleArticle extends Component {
     if (!articlesLoading && !commentsLoading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={article.title} />
+          <Header toggleSidebar={toggleSidebar} heading={article.title} display={true} />
           <main>
             <div className="articleCard">
               <div className="articleInfo">

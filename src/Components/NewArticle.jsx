@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/NewArticle.css';
 import * as api from '../Utils/api';
+import * as format from '../Utils/formatting'
 import { navigate } from '@reach/router';
 
 class NewArticle extends Component {
@@ -29,7 +30,7 @@ class NewArticle extends Component {
     if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} />
+          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} display={true} />
           <main className="newArticleMain">
             <div>
               <p>Select a Topic:</p>
@@ -101,24 +102,34 @@ class NewArticle extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     // get information from the state
-    const { newArticleBody, newArticleName, newTopicDesc, newTopicName, selectedTopic } = this.state;
-    const { user: { username } } = this.props
+    const { newTopicDesc, newTopicName, selectedTopic } = this.state;
 
     // if NEW topic has been selected, call addNewTopic first, then addNewArticle
     // if existing topic, then just addNewArticle
     if (selectedTopic === "New") {
       // call the post topic function in the api file, pass in the slug and description
       // returns the added topic, use topic.slug for the next api call
-      api.addNewTopic(newTopicName, newTopicDesc)
+      api.addNewTopic(format.formatTitle(newTopicName), format.formatText(newTopicDesc))
         .then(({ slug }) => {
           this.setState({ newTopic: slug })
         })
+        .then(() => this.submitNewArticle())
         .catch(err => console.log(err))
+    } else {
+      this.submitNewArticle()
     }
+  }
+
+  submitNewArticle = () => {
+    const { newArticleBody, newArticleName, newTopicName, selectedTopic } = this.state;
+    const { user: { username } } = this.props
     // then call the post articlebytopic function with topic, tile, body and username, returns article
     // reset the state
-    const topic = (selectedTopic === "New") ? newTopicName : selectedTopic
-    api.addNewArticle(topic, newArticleName, newArticleBody, username)
+    // if NEW topic has been selected, then need to use the newTopicName, 
+    // otherwise if it is an existing topic, then use the selected topic
+
+    const topic = (selectedTopic === "New") ? format.formatTitle(newTopicName) : format.formatTitle(selectedTopic)
+    api.addNewArticle(topic, format.formatTitle(newArticleName), format.formatText(newArticleBody), username)
       .then(article => {
         this.setState({ newArticleID: article[0].article_id })
         // navigate to the singlearticle page using article.article id

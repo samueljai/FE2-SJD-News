@@ -24,11 +24,9 @@ class Articles extends Component {
     if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} />
+          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} display={true} />
           <main>
-            <div>
-              <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
-              <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
+            <div className="subNavTop">
               <select value={sort_by} onChange={this.handleSortChange} >
                 <option default value="">Sort By:</option>
                 <option key="created_at" value="created_at">Date Created</option>
@@ -43,7 +41,7 @@ class Articles extends Component {
             </div>
             {articles.map(article => {
               return (
-                <div className="card" key={article.article_id} onClick={() => this.handleClick(article.article_id)}>
+                <div className="card articleCard" key={article.article_id} onClick={() => this.handleClick(article.article_id)}>
                   <p>{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
                   <h3>{article.title}</h3>
                   <p>
@@ -55,6 +53,11 @@ class Articles extends Component {
                 </div>
               )
             })}
+            <div className="subNavBottom">
+              <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>{"<"}</button>
+              <p>Page: {page}</p>
+              <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>{">"}</button>
+            </div>
           </main>
         </React.Fragment>
       )

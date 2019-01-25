@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './CSS/Sidebar.css';
 import { Router } from '@reach/router';
 import Homepage from './Components/Homepage';
 import NavBar from './Components/NavBar';
@@ -9,24 +10,32 @@ import Users from './Components/Users';
 import SingleArticle from './Components/SingleArticle';
 import * as api from './Utils/api';
 import NewArticle from './Components/NewArticle';
+import logo from './img/sjd_news_logo.png'
 
 class App extends Component {
 
   state = {
     sidebarClassName: 'sidebar',
+    buttonClass: 'menu-button',
     user: {},
     loggedIn: false,
+    err: false,
   }
 
   render() {
-    const { sidebarClassName, user, loggedIn } = this.state;
+    const { buttonClass, sidebarClassName, user, loggedIn } = this.state;
 
     return (
       <div className="App">
         <div className={sidebarClassName}>
-          <div className="logo">SJD News</div>
+          <div className="logo">
+            <img src={logo} alt="sjd news logo" ></img>
+          </div>
           <NavBar user={user} login={this.login} logout={this.logout} loggedIn={loggedIn} toggleSidebar={this.toggleSidebar} />
         </div>
+        <button className={buttonClass} onClick={this.toggleSidebar}>
+          <span className='bar'></span>
+        </button>
         <Router className="mainDisplay">
           <Homepage path="/" toggleSidebar={this.toggleSidebar} />
           <Topics path="/topics" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
@@ -47,9 +56,10 @@ class App extends Component {
   }
 
   toggleSidebar = () => {
-    let { sidebarClassName } = this.state;
+    let { sidebarClassName, buttonClass } = this.state;
+    buttonClass = buttonClass === 'menu-button' ? 'menu-button active' : 'menu-button'
     sidebarClassName = sidebarClassName === 'sidebar' ? 'sidebar active' : 'sidebar'
-    this.setState({ sidebarClassName });
+    this.setState({ sidebarClassName, buttonClass });
   }
 
   login = (username) => {

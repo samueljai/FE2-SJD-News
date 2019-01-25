@@ -1,0 +1,117 @@
+.sidebar {
+  transition: all .6s ease-in-out;    
+  grid-area: sidebar;
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  grid-template-areas: 
+  'logo' 
+  'navBar';
+  height: 100vh;
+  width: 60%;
+  position: fixed;
+  overflow: visible;
+  transform: translateX(-100vw);
+  box-shadow: 0 2px 2px 0 #AB987A, 0 0 0 1px #AB987A;
+  background-color: #0f1626;
+  color: #AB987A
+}
+
+.sidebar.active {
+transform: translateX(0);
+}
+
+.menu-button {
+  position: absolute;
+  top: 12px;
+  cursor: pointer;
+  border-radius: 0px;
+  border: none;
+  height: 25px;
+  margin: 0px;
+  min-height: 25px;
+  min-width: 25px;
+  padding: 0px;
+  width: 25px;
+  transform: translateX(3vw);
+  transition: all .6s ease-in-out;   
+  background-color: transparent; 
+  z-index: 1000;
+}
+
+.menu-button.active {
+    transform: translateX(49vw);
+    background-color: transparent; 
+}
+
+.menu-button:hover, .menu-button:focus, .menu-button:active {
+  outline: none;
+}
+.menu-button.active > .bar {
+  background-color: transparent;
+  transition: 0.2s;
+}
+.menu-button.active > .bar:before {
+  transform: rotate(45deg) translate(4px, 9px);
+  background-color: #AB987A;
+  transition: all 0.2s;
+  width: 20px;
+  left: 5px;
+}
+.menu-button.active > .bar:after {
+  transform: rotate(-45deg) translate(3px, -7px);
+  background-color: #AB987A;
+  transition: all 0.2s;
+  width: 20px;
+  left: 5px;
+}
+.bar {
+  width: 20px;
+  height: 2px;
+  background-color: #0f1626;
+  margin: auto auto;
+  border-radius: 3px;
+  display: block;
+  position: relative;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+.bar:before, .bar:after {
+  content: '';
+  background-color: #0f1626;
+  border-radius: 3px;
+  width: 20px;
+  height: 2px;
+  margin: 4px auto;
+  position: absolute;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+.bar:before {
+  top: -12px;
+  left: 0px;
+}
+.bar:after {
+  bottom: -12px;
+  left: 0px;
+}
+
+/* Non-mobile: Screens above 750px */
+@media only screen and (min-width: 750px) {
+  /* Show the sidebar */
+  .App {
+    grid-template-columns: 1fr 4fr; /* Add another colum in for to show side nav for non-mobile screens */
+    grid-template-areas: 
+      'sidebar mainDisplay';
+  }
+
+  .sidebar {    
+    position: relative;
+    transform: translateX(0);
+    display: grid;
+    grid-template-rows: 2fr 5fr;
+    grid-template-areas: 
+    'logo' 
+    'navBar';
+    width: 100%;
+  }
+}

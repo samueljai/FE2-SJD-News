@@ -8,3 +8,33 @@ html * {
   height: 100vh;
   width: 100vw;
 }
+
+@font-face {
+  font-family: vision1;
+  src: url(./Font/1\ Vision-Thin.otf);
+}
+
+@font-face {
+  font-family: vision2;
+  src: url(./Font/2\ Vision-Light.otf);
+}
+
+@font-face {
+  font-family: vision3;
+  src: url(./Font/3\ Vision.otf);
+}
+
+@font-face {
+  font-family: vision4;
+  src: url(./Font/4\ Vision-Bold.otf);
+}
+
+@font-face {
+  font-family: vision5;
+  src: url(./Font/5\ Vision-Heavy.otf);
+}
+
+@font-face {
+  font-family: vision6;
+  src: url(./Font/6\ Vision-Black.otf);
+}

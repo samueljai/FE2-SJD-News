@@ -19,10 +19,10 @@ class Topics extends Component {
     if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading="Topics" />
+          <Header toggleSidebar={toggleSidebar} heading="Topics" display={true} />
           <main>
             {topics.map(topic => (
-              <div className="card" key={topic.slug} onClick={() => this.handleClick(topic.slug)}>
+              <div className="card topicCard" key={topic.slug} onClick={() => this.handleClick(topic.slug)}>
                 <h3>{topic.slug}</h3>
                 <p>Description: {topic.description}</p>
               </div>

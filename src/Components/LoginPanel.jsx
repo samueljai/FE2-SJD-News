@@ -15,17 +15,25 @@ class LoginPanel extends Component {
     return loggedIn ?
       (
         // if logged in, return username and a little user icon, along with log out button
-        <React.Fragment>
-          <p>Welcome: {user.username}</p>
-          <div>Icon</div> {/*clicking on the icon should take you to the individual users page*/}
-          <button onClick={() => this.handleLogout()}>Logout</button>
-        </React.Fragment>
+        <form className="loginPanel">
+          <p>Logged In:</p>
+          <div className="username">{user.username} ICON</div> {/*clicking on the icon should take you to the individual users page*/}
+          <div className="button-group">
+            <button className="loginButtons" >Account</button>
+            <button className="loginButtons" onClick={() => this.handleLogout()}>Logout</button>
+          </div>
+        </form>
       )
       : (
         // else, if not logged in return form to log in 
         <form className="loginPanel" onSubmit={this.handleSubmit}>
-          <input type="text" id="username" onChange={this.handleChange} value={username} placeholder="Enter Username:" required />
-          <button type="submit">Login</button>
+          <p>Login:</p>
+          <input className="textbox username" type="text" id="username" onChange={this.handleChange} value={username} placeholder="Enter Username here" required />
+          <input className="textbox password" type="text" id="password" placeholder="Enter Password here" />
+          <div className="button-group">
+            <button className="loginButtons" type="submit">Login</button>
+            <button className="loginButtons" type="submit">Sign Up!</button>
+          </div>
         </form>
       )
   }

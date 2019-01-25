@@ -3,31 +3,16 @@ import '../CSS/Header.css'
 
 class Header extends Component {
 
-  state = {
-    active: false
-  }
-
   render() {
-    const { heading, loggedIn } = this.props;
-    const buttonClass = this.state.active ? 'menu-button active' : 'menu-button';
+    const { heading, loggedIn, display } = this.props;
+    const headerClass = display ? 'mainHeader active' : 'mainHeader';
 
     return (
-      <header className='mainHeader'>
-        <button className={buttonClass} onClick={this.toggle}>
-          <span className='bar'></span>
-        </button>
+      <header className={headerClass} >
         <h1>{heading}</h1>
-        {(heading.includes('Articles') && (loggedIn)) && <button onClick={() => this.handleClick()}>Add New Article</button>}
+        {(heading.includes('Articles') && (loggedIn)) && <button className="newArticleButton" onClick={() => this.handleClick()}>New Article</button>}
       </header>
     );
-  }
-
-  toggle = () => {
-    const { toggleSidebar } = this.props;
-    toggleSidebar()
-    this.setState({
-      active: !this.state.active
-    });
   }
 
   // function when new button is called
