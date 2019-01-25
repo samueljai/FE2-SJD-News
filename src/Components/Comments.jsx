@@ -1,7 +1,7 @@
 import React from 'react';
 import Voting from './Voting';
 
-const Comments = ({ article_id, comments, deleteComment, updateCommentVote, username }) => {
+const Comments = ({ article_id, comments, deleteComment, username }) => {
   return (
     <React.Fragment>
       {comments.map(comment => (

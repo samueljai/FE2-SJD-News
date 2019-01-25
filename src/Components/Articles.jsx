@@ -4,6 +4,7 @@ import '../CSS/Articles.css'
 import { navigate } from '@reach/router';
 import * as api from '../Utils/api';
 import 'react-dropdown/style.css'
+import ErrorPage from './ErrorPage';
 
 class Articles extends Component {
 
@@ -14,14 +15,16 @@ class Articles extends Component {
     isLastPage: false,
     sort_by: 'created_at',
     asc_order: false,
+    err: ""
   }
 
   render() {
     const { toggleSidebar, topic, loggedIn } = this.props;
-    const { articles, loading, page, isLastPage, sort_by, asc_order } = this.state
+    const { err, articles, loading, page, isLastPage, sort_by, asc_order } = this.state
     const heading = topic ? `${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles` : 'Articles'
 
-    if (!loading) {
+    if (err) return (<ErrorPage err={err} />)
+    else if (!loading) {
       return (
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} display={true} />

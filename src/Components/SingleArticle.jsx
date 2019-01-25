@@ -5,6 +5,7 @@ import { navigate } from '@reach/router';
 import '../CSS/Articles.css'
 import * as api from '../Utils/api'
 import Voting from './Voting';
+import ErrorPage from './ErrorPage';
 
 class SingleArticle extends Component {
   state = {
@@ -16,13 +17,15 @@ class SingleArticle extends Component {
     page: 1,
     isLastPage: false,
     newComment: "",
+    err: ''
   }
 
   render() {
     const { toggleSidebar, loggedIn, user: { username } } = this.props;
-    const { article, articlesLoading, comments, commentCount, commentsLoading, page, isLastPage, newComment } = this.state
+    const { err, article, articlesLoading, comments, commentCount, commentsLoading, page, isLastPage, newComment } = this.state
 
-    if (!articlesLoading && !commentsLoading) {
+    if (err) return (<ErrorPage err={err} />)
+    else if (!articlesLoading && !commentsLoading) {
       return (
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading={article.title} display={true} />

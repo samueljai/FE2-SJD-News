@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import '../CSS/Homepage.css'
+import logo from '../img/sjd_news_logo.png'
 
 const Homepage = ({ toggleSidebar }) => {
 
@@ -11,7 +12,10 @@ const Homepage = ({ toggleSidebar }) => {
   return (
     <React.Fragment>
       <Header toggleSidebar={toggleSidebar} display={false} heading="" />
-      <main>Homepage</main>
+      <main className="homepage">
+        <h2>Welcome to</h2>
+        <img src={logo} alt="sjd news logo" ></img>
+      </main>
     </React.Fragment>
   );
 };

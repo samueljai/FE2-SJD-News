@@ -3,20 +3,23 @@ import Header from './Header';
 import '../CSS/Topics.css'
 import { navigate } from '@reach/router';
 import * as api from '../Utils/api'
+import ErrorPage from './ErrorPage';
 
 
 class Topics extends Component {
 
   state = {
     loading: true,
-    topics: []
+    topics: [],
+    err: "true",
   }
 
   render() {
     const { toggleSidebar } = this.props
-    const { topics, loading } = this.state
+    const { topics, loading, err } = this.state
 
-    if (!loading) {
+    if (err) return (<ErrorPage err={err} />)
+    else if (!loading) {
       return (
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading="Topics" display={true} />

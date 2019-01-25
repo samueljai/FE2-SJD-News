@@ -4,6 +4,7 @@ import '../CSS/NewArticle.css';
 import * as api from '../Utils/api';
 import * as format from '../Utils/formatting'
 import { navigate } from '@reach/router';
+import ErrorPage from './ErrorPage';
 
 class NewArticle extends Component {
 
@@ -17,17 +18,19 @@ class NewArticle extends Component {
     newArticleBody: "",
     newTopic: "",
     newArticleID: 0,
+    err: ''
   }
 
   render() {
-    const { slugs, loading, selectedTopic } = this.state
+    const { err, slugs, loading, selectedTopic } = this.state
     const { topic, toggleSidebar, loggedIn } = this.props;
 
     const heading = (!topic) ?
       'Create a New Article'
       : `Create a New ${topic} Article`;
 
-    if (!loading) {
+    if (err) return (<ErrorPage err={err} />)
+    else if (!loading) {
       return (
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} display={true} />

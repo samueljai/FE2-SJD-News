@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import Header from './Header';
 import '../CSS/Users.css'
 import { navigate } from '@reach/router';
-import * as api from '../Utils/api'
+import * as api from '../Utils/api';
+import ErrorPage from './ErrorPage';
 
 class Users extends Component {
   state = {
     loading: true,
-    users: []
+    users: [],
+    err: ''
   }
   render() {
     const { toggleSidebar } = this.props;
-    const { users, loading } = this.state
+    const { err, users, loading } = this.state
 
-    if (!loading) {
+    if (err) return (<ErrorPage err={err} />)
+    else if (!loading) {
       return (
         <React.Fragment>
           <Header toggleSidebar={toggleSidebar} heading="Users" display={true} />

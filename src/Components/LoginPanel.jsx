@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import ErrorPage from './ErrorPage';
 
 class LoginPanel extends Component {
   state = {
-    username: ''
+    username: '',
+    err: ""
   }
 
   render() {
-    const { username } = this.state;
+    const { username, err } = this.state;
 
     // user & loggedIn is passed down from the props
     const { user, loggedIn } = this.props;
 
-    // check if loggedIn is true 
+    // check if loggedIn is true
+    if (err) return (<ErrorPage err={err} />)
     return loggedIn ?
       (
         // if logged in, return username and a little user icon, along with log out button
