@@ -51,6 +51,7 @@ img{
   border: 0.1rem solid #AB987A;
   color: #f5f5f5;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .navLinks {

@@ -32,6 +32,7 @@ padding: 0px 10px 0px 10px;
   border: 0.1rem solid #0f1626;
   color: #f5f5f5;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .newArticleButton:hover {
@@ -97,6 +98,7 @@ padding: 0px 10px 0px 10px;
   border: 0.1rem solid #0f1626;
   color: #f5f5f5;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .subNavBottom button {
@@ -109,6 +111,7 @@ padding: 0px 10px 0px 10px;
   border: 0.1rem solid #0f1626;
   color: #f5f5f5;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .subNavBottom button:disabled {

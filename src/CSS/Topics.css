@@ -9,6 +9,7 @@
   justify-content: space-around;
   padding-bottom: 5%;
   width: 100%;
+  cursor: pointer;
 }
 
 .topicCard h3 {

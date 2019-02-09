@@ -64,7 +64,7 @@ class App extends Component {
       .then(user => {
         // user returned if successful, update state and session storage
         this.setState({ user, loggedIn: true })
-        sessionStorage.setItem('state', JSON.stringify(this.state))
+        sessionStorage.setItem('user', JSON.stringify(user))
       })
       .catch(err => {
         this.setState({ err: err })
@@ -74,7 +74,7 @@ class App extends Component {
 
   logout = () => {
     // clear user from session storage
-    sessionStorage.removeItem('state');
+    sessionStorage.removeItem('user');
 
     // reset state user to empty and loggedIn as false
     this.setState({
