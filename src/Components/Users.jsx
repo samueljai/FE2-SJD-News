@@ -12,20 +12,23 @@ class Users extends Component {
     err: ''
   }
   render() {
-    const { toggleSidebar } = this.props;
     const { err, users, loading } = this.state
 
     if (err) return (<ErrorPage err={err} />)
     else if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading="Users" display={true} />
-          <main>
+          <Header heading="Users" display={true} />
+          <main className="usersMain">
             {users.map(user => (
-              <div className="card" key={user.username} onClick={() => this.handleClick(user.username)}>
-                <h3>{user.username}</h3>
-                <p>name: {user.name}</p>
-                <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
+              <div className="card userCard" key={user.username} onClick={() => this.handleClick(user.username)}>
+                <div className="userImg">
+                  <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
+                </div>
+                <div>
+                  <h3>{user.username}</h3>
+                  <p>Name: {user.name}</p>
+                </div>
               </div>
             ))}
           </main>

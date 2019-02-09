@@ -1,8 +1,45 @@
-/* Tablet: Screens above 700px and below 750px */
-@media only screen and (min-width: 700px) {
+.topicCard {
+  margin-bottom: 10%;
+  min-height: 300px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 5%;
+  width: 100%;
 }
 
-/* Non-mobile: Screens above 750px */
+.topicCard h3 {
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem 0.3rem 0.7rem;
+  border: 0.1rem solid #FF533D;
+  color: #0f1626;
+  border-radius: 1rem;
+}
+
+.topicCard h2 {
+  font-size: 1.5rem;
+  width: 80%
+}
+
+/* Tablet: 750px and up) */
 @media only screen and (min-width: 750px) {
-  
+  .topicMain {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly
+  }
+
+  .topicCard {
+    width: 40%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    height: 40vh;
+  }
+}
+
+/* Laptops/desktops: 992px and up */
+@media only screen and (min-width: 992px) {
 }

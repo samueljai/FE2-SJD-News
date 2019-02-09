@@ -2,11 +2,13 @@ import React from 'react';
 import '../CSS/NavBar.css';
 import { Link } from '@reach/router'
 import LoginPanel from './LoginPanel';
+import logo from '../img/sjd_news_logo.png'
 
 const NavBar = ({ toggleSidebar, user, loggedIn, login, logout }) => {
   return (
     <React.Fragment>
       <nav className="navBar">
+        <Link to="/" onClick={() => toggleSidebar()}><img src={logo} alt="sjd news logo"></img></Link>
         <LoginPanel user={user} loggedIn={loggedIn} login={login} logout={logout} />
         <section className="navLinks">
           <Link className="navListItem" to="/" onClick={() => toggleSidebar()}>HOME</Link>

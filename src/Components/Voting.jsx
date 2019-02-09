@@ -11,9 +11,9 @@ class Voting extends Component {
     const { votes } = this.props
 
     return (
-      <section className="votingBox">
+      <section className="voting">
+        <h4>Votes: {votes + voteChange}</h4>
         <button onClick={() => this.updateVote(1)} disabled={voteChange > 0}>Vote Up</button>
-        <p> {votes + voteChange}</p>
         <button onClick={() => this.updateVote(-1)} disabled={voteChange < 0}>Vote Down</button>
       </section>
     );

@@ -5,7 +5,7 @@ export const formatTitle = (string) => {
 
 // takes a string and returns the string with the first letter of each sentence capitalised
 export const formatText = (string) => {
-  const regex1 = RegExp("[!\.?]+ ", 'g');
+  const regex1 = RegExp("[!.?]+ ", 'g');
   let array1 = [];
 
   string = string[0].toUpperCase() + string.slice(1)

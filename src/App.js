@@ -10,7 +10,6 @@ import Users from './Components/Users';
 import SingleArticle from './Components/SingleArticle';
 import * as api from './Utils/api';
 import NewArticle from './Components/NewArticle';
-import logo from './img/sjd_news_logo.png'
 
 class App extends Component {
 
@@ -28,9 +27,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className={sidebarClassName}>
-          <div className="logo">
-            <img src={logo} alt="sjd news logo" ></img>
-          </div>
           <NavBar user={user} login={this.login} logout={this.logout} loggedIn={loggedIn} toggleSidebar={this.toggleSidebar} />
         </div>
         <button className={buttonClass} onClick={this.toggleSidebar}>

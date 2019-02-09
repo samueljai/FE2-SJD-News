@@ -1,7 +1,61 @@
-/* Tablet: Screens above 700px and below 750px */
-@media only screen and (min-width: 700px) {
+.usersMain {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly
 }
 
-/* Non-mobile: Screens above 750px */
+.userCard {
+  margin: 5% 1.5%;
+  min-height: 200px;
+  height: 20vh;
+  max-width: 300px;
+  width: 90%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.userImg {
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 1px solid black;
+  border-radius: 3rem;
+}
+
+.userImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 0%;
+}
+
+.userCard h3 {
+  font-size: 1.2rem;
+  width: 100%;
+  font-family: vision2;
+}
+
+/* Tablet: 750px and up) */
 @media only screen and (min-width: 750px) {
+  .userCard {
+    max-width: 400px;
+    margin-bottom: 1.5%;
+    height: 30vh;
+  }
+
+  .userImg {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 3.5rem;
+  }
+  
+  .userCard h3 {
+    font-size: 2rem;
+  }
+}
+
+/* Laptops/desktops: 992px and up */
+@media only screen and (min-width: 992px) {
 }

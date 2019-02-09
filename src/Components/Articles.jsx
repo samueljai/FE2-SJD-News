@@ -5,6 +5,7 @@ import { navigate } from '@reach/router';
 import * as api from '../Utils/api';
 import 'react-dropdown/style.css'
 import ErrorPage from './ErrorPage';
+import * as format from '../Utils/formatting'
 
 class Articles extends Component {
 
@@ -19,7 +20,7 @@ class Articles extends Component {
   }
 
   render() {
-    const { toggleSidebar, topic, loggedIn } = this.props;
+    const { topic, loggedIn } = this.props;
     const { err, articles, loading, page, isLastPage, sort_by, asc_order } = this.state
     const heading = topic ? `${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles` : 'Articles'
 
@@ -27,32 +28,43 @@ class Articles extends Component {
     else if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} display={true} />
-          <main>
+          <Header heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} display={true} />
+          <main className="articlesMain">
             <div className="subNavTop">
+              <label>Sort By:</label>
               <select value={sort_by} onChange={this.handleSortChange} >
-                <option default value="">Sort By:</option>
                 <option key="created_at" value="created_at">Date Created</option>
                 <option key="comment_count" value="comment_count">Comments</option>
                 <option key="votes" value="votes">Votes</option>
               </select >
+              <label>Order:</label>
               <select value={asc_order} onChange={this.handleOrderChange} >
-                <option default value="">Order:</option>
-                <option key="desc" value="false">Descening</option>
+                <option key="desc" value="false">Descending</option>
                 <option key="asc" value="true">Ascending</option>
               </select >
+              {(loggedIn) && <button className="newArticleButton" onClick={() => this.handleNewArticle()}>Post Article</button>}
             </div>
             {articles.map(article => {
               return (
-                <div className="card articleCard" key={article.article_id} onClick={() => this.handleClick(article.article_id)}>
-                  <p>{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
-                  <h3>{article.title}</h3>
-                  <p>
-                    by {article.author}<br></br>
-                    Comments: {article.comment_count}<br></br>
-                    Votes: {article.votes}
-                  </p>
-                  <h4>{article.topic}</h4>
+                <div className="card articleCard" key={article.article_id}>
+                  <div className="articleImg">IMAGE HERE</div>
+                  <div className="articleBox">
+                    <div className="articleInfo1">
+                      <div className="box1">
+                        <p className="topic">{article.topic.toUpperCase()}</p>
+                        <p className="date">{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
+                        <p className="author">by {article.author}</p>
+                      </div>
+                      <div className="box2">
+                        <p className="comments">Comments: {article.comment_count}</p>
+                        <p className="votes">Votes: {article.votes}</p>
+                      </div>
+                    </div>
+                    <div className="articleInfo2">
+                      <h3>{format.formatTitle(article.title)}</h3>
+                      <button onClick={() => this.handleClick(article.article_id)}>Read Article</button>
+                    </div>
+                  </div>
                 </div>
               )
             })}
@@ -62,7 +74,7 @@ class Articles extends Component {
               <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>{">"}</button>
             </div>
           </main>
-        </React.Fragment>
+        </React.Fragment >
       )
     }
     else return (<p className="loading">is loading...</p>);
@@ -98,7 +110,7 @@ class Articles extends Component {
         if (!articles.length) this.setState({ isLastPage: true, loading: false })
         else this.setState({ isLastPage: false, loading: false })
       })
-      .catch(err => this.setState({ err, isLastPage: true, loading: false }))
+      .catch(err => this.setState({ isLastPage: true, loading: false }))
   }
 
   handleClick = article_id => {

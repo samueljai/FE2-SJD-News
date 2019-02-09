@@ -15,19 +15,20 @@ class Topics extends Component {
   }
 
   render() {
-    const { toggleSidebar } = this.props
     const { topics, loading, err } = this.state
 
     if (err) return (<ErrorPage err={err} />)
     else if (!loading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading="Topics" display={true} />
-          <main>
+          <Header heading="Topics" display={true} />
+          <main className="topicMain">
             {topics.map(topic => (
               <div className="card topicCard" key={topic.slug} onClick={() => this.handleClick(topic.slug)}>
-                <h3>{topic.slug}</h3>
-                <p>Description: {topic.description}</p>
+                <h3>{topic.slug.toUpperCase()}</h3>
+                <h4>IMAGE HERE</h4>
+                <h2>{topic.description.toUpperCase()}</h2>
+
               </div>
             ))}
           </main>

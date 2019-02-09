@@ -1,15 +1,8 @@
 .sidebar {
   transition: all .6s ease-in-out;    
-  grid-area: sidebar;
-  display: grid;
-  grid-template-rows: 1fr 6fr;
-  grid-template-areas: 
-  'logo' 
-  'navBar';
   height: 100vh;
-  width: 60%;
+  width: 60vw;
   position: fixed;
-  overflow: visible;
   transform: translateX(-100vw);
   box-shadow: 0 2px 2px 0 #AB987A, 0 0 0 1px #AB987A;
   background-color: #0f1626;
@@ -21,7 +14,7 @@ transform: translateX(0);
 }
 
 .menu-button {
-  position: absolute;
+  position: fixed;
   top: 12px;
   cursor: pointer;
   border-radius: 0px;
@@ -97,21 +90,16 @@ transform: translateX(0);
 
 /* Non-mobile: Screens above 750px */
 @media only screen and (min-width: 750px) {
-  /* Show the sidebar */
-  .App {
-    grid-template-columns: 1fr 4fr; /* Add another colum in for to show side nav for non-mobile screens */
-    grid-template-areas: 
-      'sidebar mainDisplay';
+  .sidebar {
+    transform: translateX(0);
+    width: 20vw;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
   }
 
-  .sidebar {    
-    position: relative;
-    transform: translateX(0);
-    display: grid;
-    grid-template-rows: 2fr 5fr;
-    grid-template-areas: 
-    'logo' 
-    'navBar';
-    width: 100%;
+  /* hide the menu button */
+  .menu-button {
+    display: none
   }
 }

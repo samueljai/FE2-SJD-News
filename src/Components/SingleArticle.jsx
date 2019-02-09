@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Comments from './Comments';
 import { navigate } from '@reach/router';
-import '../CSS/Articles.css'
+import '../CSS/SingleArticle.css'
 import * as api from '../Utils/api'
 import Voting from './Voting';
 import ErrorPage from './ErrorPage';
+import * as format from '../Utils/formatting'
 
 class SingleArticle extends Component {
   state = {
@@ -21,47 +22,62 @@ class SingleArticle extends Component {
   }
 
   render() {
-    const { toggleSidebar, loggedIn, user: { username } } = this.props;
+    const { loggedIn, user: { username } } = this.props;
     const { err, article, articlesLoading, comments, commentCount, commentsLoading, page, isLastPage, newComment } = this.state
 
     if (err) return (<ErrorPage err={err} />)
-    else if (!articlesLoading && !commentsLoading) {
+    if (!articlesLoading && !commentsLoading) {
       return (
         <React.Fragment>
-          <Header toggleSidebar={toggleSidebar} heading={article.title} display={true} />
-          <main>
-            <div className="articleCard">
-              <div className="articleInfo">
-                <p>{article.topic}</p>
-                <p>{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
-                <p>{article.author}</p>
-                <p>{commentCount} Comments</p>
+          <Header heading={article.title} display={false} />
+          <main className="fullArticleMain">
+            <div className="card fullArticleCard">
+              <div className="fullArticleImg">
+                <h1>{article.title.toUpperCase()}</h1>
+                IMAGE HERE!
+            </div>
+              <div className="articleInfo1">
+                <div className="box1">
+                  <p className="topic">{article.topic.toUpperCase()}</p>
+                  <p className="date">{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
+                  <p className="author">by {article.author}</p>
+                </div>
+                <div className="box2">
+                  <p className="comments">Comments: {commentCount}</p>
+                  <p className="votes">Votes: {article.votes}</p>
+                </div>
+              </div>
+              <div className="articleBody">
+                <p>{format.formatText(article.body)}</p>
+              </div>
+              <div className="votingBox">
                 <Voting votes={article.votes} article_id={article.article_id} />
                 {article.author === username &&
-                  (<button onClick={() => this.deleteArticle(article.article_id)} >Delete</button>)
+                  (<button className="deleteButton" onClick={() => this.deleteArticle(article.article_id)} >Delete Article</button>)
                 }
               </div>
-              <div className="articlBody">
-                <p>{article.body}</p>
-              </div>
               <div className="commentsBox">
-                <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>Previous</button>
-                <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>Next</button>
                 <h3>{commentCount} Comments</h3>
                 {(loggedIn) &&
-                  <form onSubmit={this.handleSubmit}> New Comment:
+                  <form onSubmit={this.handleSubmit}>
+                    <h4>Say Something:</h4>
                     <textarea required id="newComment" value={newComment} onChange={this.handleChange} placeholder="Enter a new comment..." />
-                    <button type="submit">Submit Comment</button>
+                    <button type="submit">Post Comment</button>
                   </form>
                 }
                 <Comments article_id={article.article_id} comments={comments} username={username} deleteComment={this.deleteComment} updateCommentVotes={this.updateCommentVotes} />
+                <div className="subNavBottom">
+                  <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>{"<"}</button>
+                  <p>Page: {page}</p>
+                  <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>{">"}</button>
+                </div>
               </div>
             </div>
           </main>
         </React.Fragment>
       )
     }
-    else return (<p className="loading">is loading...</p>);
+    else return (<p className="loading">Loading...</p>);
   }
 
   componentDidMount() {
@@ -98,13 +114,13 @@ class SingleArticle extends Component {
       .then(comments => {
         this.setState({ comments, commentsLoading: false })
       })
-      .catch(err => this.setState({ err, comments: [] }))
+      .catch(err => this.setState({ comments: [] }))
     api.getCommentsByArticleId(article_id, page + 1)
       .then(comments => {
         if (!comments.length) this.setState({ isLastPage: true, commentsLoading: false })
         else this.setState({ isLastPage: false, commentsLoading: false })
       })
-      .catch(err => this.setState({ err, isLastPage: true, commentsLoading: false }))
+      .catch(err => this.setState({ isLastPage: true, commentsLoading: false }))
   }
 
   updatePageNumber = direction => {
