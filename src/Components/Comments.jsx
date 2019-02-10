@@ -6,7 +6,7 @@ const Comments = ({ article_id, comments, deleteComment, username }) => {
     <React.Fragment>
       {comments.map(comment => (
         <div className="comment" key={comment.comment_id}>
-          <div className="authorImg">author img</div>
+          <div className="authorImg"><img src="https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/avatar-128.png" alt="avatar" /></div>
           <h4>{comment.author}</h4>
           <p>{new Date(new Date(comment.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
           <p>{comment.body}</p>

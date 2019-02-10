@@ -23,7 +23,7 @@ class Users extends Component {
           {users.map(user => (
             <div className="card userCard" key={user.username} onClick={() => this.handleClick(user.username)}>
               <div className="userImg">
-                <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
+                <img src="https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/avatar-128.png" alt={`${user.username}'s avatar`} />
               </div>
               <div>
                 <h3>{user.username}</h3>
