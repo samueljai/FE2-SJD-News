@@ -10,6 +10,7 @@ import Users from './Components/Users';
 import SingleArticle from './Components/SingleArticle';
 import * as api from './Utils/api';
 import NewArticle from './Components/NewArticle';
+import ErrorPage from './Components/ErrorPage';
 
 class App extends Component {
 
@@ -41,6 +42,7 @@ class App extends Component {
           <NewArticle path="/new_article/:topic" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} user={user} />
           <SingleArticle path="articles/:article_id" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} user={user} />
           <Users path="/users" toggleSidebar={this.toggleSidebar} loggedIn={loggedIn} />
+          <ErrorPage default />
         </Router>
       </div>
     );

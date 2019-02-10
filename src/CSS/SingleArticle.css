@@ -79,9 +79,8 @@
 }
 
 .commentsBox form button {  
-  width: 40%;
   height: 1.4rem;
-  padding: 1px 6px 0 6px;
+  padding: 1px 10px ;
   font-size: 0.8rem;
   text-align: center;
   background-color: #FF533D;

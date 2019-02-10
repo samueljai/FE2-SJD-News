@@ -25,59 +25,57 @@ class Articles extends Component {
     const heading = topic ? `${topic.charAt(0).toUpperCase() + topic.slice(1)} Articles` : 'Articles'
 
     if (err) return (<ErrorPage err={err} />)
-    else if (!loading) {
-      return (
-        <React.Fragment>
-          <Header heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} display={true} />
-          <main className="articlesMain">
-            <div className="subNavTop">
-              <label>Sort By:</label>
-              <select value={sort_by} onChange={this.handleSortChange} >
-                <option key="created_at" value="created_at">Date Created</option>
-                <option key="comment_count" value="comment_count">Comments</option>
-                <option key="votes" value="votes">Votes</option>
-              </select >
-              <label>Order:</label>
-              <select value={asc_order} onChange={this.handleOrderChange} >
-                <option key="desc" value="false">Descending</option>
-                <option key="asc" value="true">Ascending</option>
-              </select >
-              {(loggedIn) && <button className="newArticleButton" onClick={() => this.handleNewArticle()}>Post Article</button>}
-            </div>
-            {articles.map(article => {
-              return (
-                <div className="card articleCard" key={article.article_id}>
-                  <div className="articleImg">IMAGE HERE</div>
-                  <div className="articleBox">
-                    <div className="articleInfo1">
-                      <div className="box1">
-                        <p className="topic">{article.topic.toUpperCase()}</p>
-                        <p className="date">{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
-                        <p className="author">by {article.author}</p>
-                      </div>
-                      <div className="box2">
-                        <p className="comments">Comments: {article.comment_count}</p>
-                        <p className="votes">Votes: {article.votes}</p>
-                      </div>
+    if (loading) return (<p className="loading">is loading...</p>);
+    return (
+      <React.Fragment>
+        <Header heading={heading} loggedIn={loggedIn} handleNewArticle={this.handleNewArticle} display={true} />
+        <main className="articlesMain">
+          <div className="subNavTop">
+            <label>Sort By:</label>
+            <select value={sort_by} onChange={this.handleSortChange} >
+              <option key="created_at" value="created_at">Date Created</option>
+              <option key="comment_count" value="comment_count">Comments</option>
+              <option key="votes" value="votes">Votes</option>
+            </select >
+            <label>Order:</label>
+            <select value={asc_order} onChange={this.handleOrderChange} >
+              <option key="desc" value="false">Descending</option>
+              <option key="asc" value="true">Ascending</option>
+            </select >
+            {(loggedIn) && <button className="newArticleButton" onClick={() => this.handleNewArticle()}>Post Article</button>}
+          </div>
+          {articles.map(article => {
+            return (
+              <div className="card articleCard" key={article.article_id}>
+                <div className="articleImg">IMAGE HERE</div>
+                <div className="articleBox">
+                  <div className="articleInfo1">
+                    <div className="box1">
+                      <p className="topic">{article.topic.toUpperCase()}</p>
+                      <p className="date">{new Date(new Date(article.created_at).toJSON()).toUTCString().slice(5, 16)}</p>
+                      <p className="author">by {article.author}</p>
                     </div>
-                    <div className="articleInfo2">
-                      <h3>{format.formatTitle(article.title)}</h3>
-                      <button onClick={() => this.handleClick(article.article_id)}>Read Article</button>
+                    <div className="box2">
+                      <p className="comments">Comments: {article.comment_count}</p>
+                      <p className="votes">Votes: {article.votes}</p>
                     </div>
                   </div>
+                  <div className="articleInfo2">
+                    <h3>{format.formatTitle(article.title)}</h3>
+                    <button onClick={() => this.handleClick(article.article_id)}>Read Article</button>
+                  </div>
                 </div>
-              )
-            })}
-            <div className="subNavBottom">
-              <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>{"<"}</button>
-              <p>Page: {page}</p>
-              <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>{">"}</button>
-            </div>
-          </main>
-        </React.Fragment >
-      )
-    }
-    else return (<p className="loading">is loading...</p>);
+              </div>
+            )
+          })}
+          <div className="subNavBottom">
+            <button onClick={() => this.updatePageNumber(-1)} disabled={page === 1}>{"<"}</button>
+            <p>Page: {page}</p>
+            <button onClick={() => this.updatePageNumber(1)} disabled={isLastPage}>{">"}</button>
+          </div>
+        </main>
+      </React.Fragment >
+    )
   }
 
   componentDidMount() {

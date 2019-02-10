@@ -15,27 +15,25 @@ class Users extends Component {
     const { err, users, loading } = this.state
 
     if (err) return (<ErrorPage err={err} />)
-    else if (!loading) {
-      return (
-        <React.Fragment>
-          <Header heading="Users" display={true} />
-          <main className="usersMain">
-            {users.map(user => (
-              <div className="card userCard" key={user.username} onClick={() => this.handleClick(user.username)}>
-                <div className="userImg">
-                  <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
-                </div>
-                <div>
-                  <h3>{user.username}</h3>
-                  <p>Name: {user.name}</p>
-                </div>
+    if (loading) return (<p className="loading">is loading...</p>);
+    return (
+      <React.Fragment>
+        <Header heading="Users" display={true} />
+        <main className="usersMain">
+          {users.map(user => (
+            <div className="card userCard" key={user.username} onClick={() => this.handleClick(user.username)}>
+              <div className="userImg">
+                <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
               </div>
-            ))}
-          </main>
-        </React.Fragment>
-      )
-    }
-    else return (<p className="loading">is loading...</p>);
+              <div>
+                <h3>{user.username}</h3>
+                <p>Name: {user.name}</p>
+              </div>
+            </div>
+          ))}
+        </main>
+      </React.Fragment>
+    )
   }
 
   componentDidMount() {

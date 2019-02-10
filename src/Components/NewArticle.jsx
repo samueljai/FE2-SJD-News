@@ -30,42 +30,40 @@ class NewArticle extends Component {
       : `Create a New ${topic} Article`;
 
     if (err) return (<ErrorPage err={err} />)
-    else if (!loading) {
-      return (
-        <React.Fragment>
-          <Header heading={heading} loggedIn={loggedIn} display={true} />
-          <main className="newArticleMain">
-            <div className="newArticleTopic">
-              <h3>Select a Topic for your Article:</h3>
-              <div className="styled-topicSelect">
-                <select className="topicSelect" autoFocus required defaultValue={topic} onChange={this.handleTopicSelect} >
-                  <option value="New">New Topic</option>
-                  {slugs.map(slug => {
-                    return (<option key={slug} value={slug}>{slug}</option>)
-                  })}
-                </select >
-              </div>
+    if (loading) return (<p className="loading">is loading...</p>);
+    return (
+      <React.Fragment>
+        <Header heading={heading} loggedIn={loggedIn} display={true} />
+        <main className="newArticleMain">
+          <div className="newArticleTopic">
+            <h3>Select a Topic for your Article:</h3>
+            <div className="styled-topicSelect">
+              <select className="topicSelect" autoFocus required defaultValue={topic} onChange={this.handleTopicSelect} >
+                <option value="New">New Topic</option>
+                {slugs.map(slug => {
+                  return (<option key={slug} value={slug}>{slug}</option>)
+                })}
+              </select >
             </div>
-            <form onSubmit={this.handleSubmit} className="newArticleForm">
-              {(selectedTopic === "New") &&
-                <section className="newTopicSection">
-                  <h3>New Topic Details:</h3>
-                  <input type="text" required id="newTopicName" value={this.state.value} onChange={this.handleChange} placeholder="Enter a New Topic Title" />
-                  <textarea required id="newTopicDesc" value={this.state.value} onChange={this.handleChange} placeholder="Enter a description for your new topic..." />
-                </section>
-              }
-              <section className="newArticleSection">
-                <h3>New Article Details:</h3>
-                <input type="text" required id="newArticleName" value={this.state.value} onChange={this.handleChange} placeholder="Enter a New Article Title" />
-                <textarea required id="newArticleBody" value={this.state.value} onChange={this.handleChange} placeholder="Enter your new article..." />
+          </div>
+          <form onSubmit={this.handleSubmit} className="newArticleForm">
+            {(selectedTopic === "New") &&
+              <section className="newTopicSection">
+                <h3>New Topic Details:</h3>
+                <input type="text" required id="newTopicName" value={this.state.value} onChange={this.handleChange} placeholder="Enter a New Topic Title" />
+                <textarea required id="newTopicDesc" value={this.state.value} onChange={this.handleChange} placeholder="Enter a description for your new topic..." />
               </section>
-              <button className="publishButton" type="submit">Publish Your Article</button>
-            </form>
-          </main>
-        </React.Fragment>
-      )
-    }
-    else return (<p className="loading">is loading...</p>);
+            }
+            <section className="newArticleSection">
+              <h3>New Article Details:</h3>
+              <input type="text" required id="newArticleName" value={this.state.value} onChange={this.handleChange} placeholder="Enter a New Article Title" />
+              <textarea required id="newArticleBody" value={this.state.value} onChange={this.handleChange} placeholder="Enter your new article..." />
+            </section>
+            <button className="publishButton" type="submit">Publish Your Article</button>
+          </form>
+        </main>
+      </React.Fragment>
+    )
   }
 
   componentDidMount() {
