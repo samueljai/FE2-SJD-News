@@ -1,16 +1,23 @@
 .sidebar {
+  -webkit-transition: all .6s ease-in-out;
+  -o-transition: all .6s ease-in-out;
   transition: all .6s ease-in-out;    
   height: 100vh;
   width: 60vw;
   position: fixed;
-  transform: translateX(-100vw);
-  box-shadow: 0 2px 2px 0 #AB987A, 0 0 0 1px #AB987A;
+  -webkit-transform: translateX(-100vw);
+      -ms-transform: translateX(-100vw);
+          transform: translateX(-100vw);
+  -webkit-box-shadow: 0 2px 2px 0 #AB987A, 0 0 0 1px #AB987A;
+          box-shadow: 0 2px 2px 0 #AB987A, 0 0 0 1px #AB987A;
   background-color: #0f1626;
   color: #AB987A
 }
 
 .sidebar.active {
-transform: translateX(0);
+-webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+        transform: translateX(0);
 }
 
 .menu-button {
@@ -25,14 +32,20 @@ transform: translateX(0);
   min-width: 25px;
   padding: 0px;
   width: 25px;
-  transform: translateX(3vw);
+  -webkit-transform: translateX(3vw);
+      -ms-transform: translateX(3vw);
+          transform: translateX(3vw);
+  -webkit-transition: all .6s ease-in-out;
+  -o-transition: all .6s ease-in-out;
   transition: all .6s ease-in-out;   
   background-color: transparent; 
   z-index: 1000;
 }
 
 .menu-button.active {
-    transform: translateX(49vw);
+    -webkit-transform: translateX(49vw);
+        -ms-transform: translateX(49vw);
+            transform: translateX(49vw);
     background-color: transparent; 
 }
 
@@ -41,18 +54,28 @@ transform: translateX(0);
 }
 .menu-button.active > .bar {
   background-color: transparent;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
   transition: 0.2s;
 }
 .menu-button.active > .bar:before {
-  transform: rotate(45deg) translate(4px, 9px);
+  -webkit-transform: rotate(45deg) translate(4px, 9px);
+      -ms-transform: rotate(45deg) translate(4px, 9px);
+          transform: rotate(45deg) translate(4px, 9px);
   background-color: #AB987A;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
   transition: all 0.2s;
   width: 20px;
   left: 5px;
 }
 .menu-button.active > .bar:after {
-  transform: rotate(-45deg) translate(3px, -7px);
+  -webkit-transform: rotate(-45deg) translate(3px, -7px);
+      -ms-transform: rotate(-45deg) translate(3px, -7px);
+          transform: rotate(-45deg) translate(3px, -7px);
   background-color: #AB987A;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
   transition: all 0.2s;
   width: 20px;
   left: 5px;
@@ -65,8 +88,11 @@ transform: translateX(0);
   border-radius: 3px;
   display: block;
   position: relative;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
   transition: all 0.3s;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 .bar:before, .bar:after {
   content: '';
@@ -76,8 +102,11 @@ transform: translateX(0);
   height: 2px;
   margin: 4px auto;
   position: absolute;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
   transition: all 0.3s;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 .bar:before {
   top: -12px;
@@ -91,7 +120,9 @@ transform: translateX(0);
 /* Non-mobile: Screens above 750px */
 @media only screen and (min-width: 750px) {
   .sidebar {
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
     width: 20vw;
     position: -webkit-sticky;
     position: sticky;

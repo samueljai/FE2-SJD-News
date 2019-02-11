@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "3a975084ca37b0687197",
-    "url": "/static/css/main.6c7549d3.chunk.css"
+    "revision": "d8195a1c8338c8d012b0",
+    "url": "/static/css/main.061baa6d.chunk.css"
   },
   {
-    "revision": "3a975084ca37b0687197",
-    "url": "/static/js/main.3a975084.chunk.js"
+    "revision": "d8195a1c8338c8d012b0",
+    "url": "/static/js/main.d8195a1c.chunk.js"
   },
   {
-    "revision": "a2def8e7c5c4357b57c0",
-    "url": "/static/css/1.bb0465a9.chunk.css"
+    "revision": "dd9fd9e118df92469a61",
+    "url": "/static/css/1.41d0083e.chunk.css"
   },
   {
-    "revision": "a2def8e7c5c4357b57c0",
-    "url": "/static/js/1.a2def8e7.chunk.js"
+    "revision": "dd9fd9e118df92469a61",
+    "url": "/static/js/1.dd9fd9e1.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/static/media/3 Vision.4220a439.otf"
   },
   {
-    "revision": "25e893451bbebbb0870a30fdbc6dbd77",
-    "url": "/static/media/2 Vision-Light.25e89345.otf"
-  },
-  {
     "revision": "64fe0656ddb429743ff96d1990be3aac",
     "url": "/static/media/1 Vision-Thin.64fe0656.otf"
+  },
+  {
+    "revision": "25e893451bbebbb0870a30fdbc6dbd77",
+    "url": "/static/media/2 Vision-Light.25e89345.otf"
   },
   {
     "revision": "878041380c6a3c443bfc39548a626c7b",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/static/media/6 Vision-Black.ffc305d7.otf"
   },
   {
-    "revision": "7e6c2627fdcb59f116e020baa9b98109",
+    "revision": "d8e0b64741d0c2883395ae0f09c6843d",
     "url": "/index.html"
   }
 ];
