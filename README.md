@@ -14,9 +14,9 @@ Once cloned, run npm install to download the required node-modules and dependenc
 You can then run npm start to view the site on the development server.
 
 ## Links 
-Deployed App: https://sjd-news.netlify.com/
-Back End Repo: https://github.com/samueljai/SJD-News
-Back End Api: https://sjd-news.herokuapp.com/api
+- Deployed App: https://sjd-news.netlify.com/
+- Back End Repo: https://github.com/samueljai/SJD-News
+- Back End Api: https://sjd-news.herokuapp.com/api
 
 ## Application Features
 ### All Visitors:
