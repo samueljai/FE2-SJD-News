@@ -9,26 +9,32 @@ SJD News has articles which are divided into topics. Each article has user curat
 React.js
 
 ## Installing
-Once cloned, run npm install to download the required node-modules and dependencies.
+Once cloned, use the following command to download the required node-modules and dependencies:
+```
+npm install
+```
 
-You can then run npm start to view the site on the development server.
+To view the site on the development server, run: 
+```
+run npm start
+```
 
 ## Links 
-Deployed App: https://sjd-news.netlify.com/
-Back End Repo: https://github.com/samueljai/SJD-News
-Back End Api: https://sjd-news.herokuapp.com/api
+- Deployed App: https://sjd-news.netlify.com/
+- Back End Repo: https://github.com/samueljai/SJD-News
+- Back End Api: https://sjd-news.herokuapp.com/api
 
 ## Application Features
-### All Visitors:
+### All Visitors can:
 - Browse the topics and all the articles, and
 - Browse the artices for a specific topic
 - View an article and any associated comments from past visitors
 - You can also sort articles by date, number of comments or votes
 
 ### To Log In:
-Navigate to the users section to see a list of users, and enter their username in the navigation bar on the left and click Login. You do not need to enter a password. 
+Navigate to the users section to see a list of users, pick one and enter the username in the navigation bar on the left and click Login. You do not need to enter a password. 
 
-### Logged In Users:
+### Logged In Users can:
 - Post a new article, either to a new topic, or an existing topic
 - Post a new comment to an existing article
 - Vote on an article/comment
@@ -42,3 +48,6 @@ SJD-News will be an ongoing project, and there are plans to develop the site fur
 - Each Topic/Article to have an image displayed
 - A Loading Spinner
 - Transitions and styling to buttons and cards for improved UX
+
+## Authors
+Samuel Jai
