@@ -15,8 +15,14 @@ const Homepage = () => {
     <React.Fragment>
       <Header display={false} heading="" />
       <main className="homepage">
-        <h2>Welcome to</h2>
-        <img src={logo} alt="sjd news logo" ></img>
+        <div className="infoBar">
+          <p>To log in click on Users in the navation bar, pick a user and enter their username and click Login.</p>
+          <p>You do not need to enter a password.</p>
+        </div>
+        <div className="welcome">
+          <h2>Welcome to</h2>
+          <img src={logo} alt="sjd news logo" ></img>
+        </div>
       </main>
     </React.Fragment>
   );
